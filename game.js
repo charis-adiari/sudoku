@@ -1,3 +1,9 @@
 import { GameSettings } from "./game-settings.js";
 
-const gameSettings = new GameSettings();
+const savedSettings = JSON.parse(localStorage.getItem('game-settings'));
+
+const gameSettings = new GameSettings(
+  savedSettings.trainingWheels, 
+  savedSettings.trackMistakes, 
+  savedSettings.nightMode
+);

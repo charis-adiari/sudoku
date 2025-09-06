@@ -1,9 +1,9 @@
 export class GameSettings {
-  constructor() {
+  constructor(trainingWheels, trackMistakes, nightMode) {
     this.settings = {
-      trainingWheels: false,
-      trackMistakes: false,
-      nightMode: true
+      trainingWheels: trainingWheels,
+      trackMistakes: trackMistakes,
+      nightMode: nightMode
     };
 
     this.toggleTrainingWheels();
@@ -28,6 +28,6 @@ export class GameSettings {
 
   #saveSetting(key, value) {
     this.settings[key] = value;
-    localStorage.setItem('game-settings', this.settings);
+    localStorage.setItem('game-settings', JSON.stringify(this.settings));
   }
 }
