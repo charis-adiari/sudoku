@@ -189,3 +189,7 @@ input:checked + .slider:before {
   -ms-transform: translateX(1.8rem);
   transform: translateX(1.8rem);
 }
+
+.disabled {
+  opacity: 0.6;
+}
