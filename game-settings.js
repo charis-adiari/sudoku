@@ -9,8 +9,6 @@ export class GameSettings {
     // TODO: use this.settings to set initial values of checkbox, leave for now; start on actual game
 
     this.toggleTrainingWheels();
-    this.toggleTrackMistakes();
-    this.toggleNightMode();
 
     $('#training-wheels').on('change', () => this.toggleTrainingWheels());
     $('#track-mistakes').on('change', () => this.toggleTrackMistakes());
