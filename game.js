@@ -1,25 +1,54 @@
-import { GameSettings } from "./game-settings.js";
-import { Board } from "./sudoku-board.js";
+import { GameSettings } from "./scripts/game-settings.js";
+import { Board } from "./scripts/sudoku-board.js";
+import { Timer } from "./scripts/utils.js";
 
-const savedSettings = JSON.parse(localStorage.getItem('game-settings'));
-let gameSettings;
+class Game {
+  constructor() {
+    this.settings = this.#initSettings();
+    this.board = new Board($('#sudoku-board').width());
+    this.timer = new Timer();
+  }
 
-if (savedSettings) {
-  gameSettings = new GameSettings(
-    savedSettings.trainingWheels, 
-    savedSettings.trackMistakes, 
-    savedSettings.nightMode
-  );
-} else {
-  gameSettings = new GameSettings(false, false, true);
+  startNewGame() {
+    this.#createBoard();
+    this.timer.startTimer();
+  }
+
+  #createBoard() {
+    this.board.createCells();
+    console.log('board', this.board);
+    console.log(this.board.cells[2][6].getHtmlElement());
+  }
+
+  #initSettings() {
+    const savedSettings = JSON.parse(localStorage.getItem('game-settings'));
+    let settings;
+
+    if (savedSettings) {
+      settings = new GameSettings(
+        savedSettings.trainingWheels,
+        savedSettings.trackMistakes,
+        savedSettings.nightMode
+      );
+    } else {
+      settings = new GameSettings(false, false, true);
+    }
+
+    return settings;
+  }
+
+  #getSettings() {
+    
+  }
+
+  #applySetttings() {
+
+  }
 }
 
 const newGame = () => {
-  const board = new Board($('#sudoku-board').width());  
-  board.createCells();
-  console.log('board', board);
-  
-  console.log(board.cells[2][6].getHtmlElement());
+  const game = new Game();
+  game.startNewGame();
 }
 
 newGame();
