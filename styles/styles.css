@@ -1,9 +1,5 @@
 @import url('variables.css');
 
-html {
-  font-size: 16px;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -13,37 +9,6 @@ body {
   margin: 0;
   padding: 0.5rem 0.75rem;
   background-color: var(--background);
-}
-
-/* HEADER */
-
-h1 {
-  font-weight: 900;
-  text-align: center;
-  margin-top: 0;
-}
-
-/* -- GLOBAL FUNCTIONS */
-
-.global-functions {
-  padding: 0.5rem 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* ---- FORM */
-
-.label {
-  margin-right: 0.25em;
-}
-
-#new-game-form .select {
-  outline: none;
-  border: none;
-  background-color: inherit;
-  border-bottom: 1px solid var(--primary);
-  font-size: 1rem;
-  font-weight: 300;
 }
 
 .btn {
@@ -67,11 +32,30 @@ h1 {
   background-color: var(--btn-text);
 }
 
-#new-game-form #new-game {
-  margin-left: 1.5em;
+.btn-icon {
+  border-radius: 50%;
+  font-size: 0.8rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  text-align: center;
+  align-content: center;
+  align-self: center;
+
+  i {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+  }
 }
 
-/* ---- DROPDOWN */
+.disabled {
+  opacity: 0.6;
+  
+  * { cursor: default; }
+}
+
+/* DROPDOWN */
 
 .dropdown {
   position: relative;
@@ -92,6 +76,11 @@ h1 {
     padding: 0.5em;
     border-radius: 5px;
 
+    .inner-toggle {
+      margin-left: 1rem;
+      padding-top: 0.25em;
+    }
+
     .label:first-child { padding-top: 0; }
     
     .label {
@@ -99,15 +88,59 @@ h1 {
       align-items: center;
       padding-top: 0.5em;
     }
-
-    .inner-toggle {
-      margin-left: 1rem;
-      padding-top: 0.25em;
-    }
   }
 }
 
 .dropdown:hover .dropdown-content { display: block; }
+
+.game-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  font-size: 0.8em;
+
+  .counter {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  #time-container { text-align: right; }
+
+}
+
+.global-functions {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-weight: 900;
+  text-align: center;
+  margin-top: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+.label {
+  margin-right: 0.25em;
+}
+
+#new-game-form .select {
+  outline: none;
+  border: none;
+  background-color: inherit;
+  border-bottom: 1px solid var(--primary);
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+#new-game-form #new-game {
+  margin-left: 1.5em;
+}
+
 
 /* TOGGLE BUTTON */
 .switch {
@@ -119,7 +152,7 @@ h1 {
 }
 
 /* Hide default HTML checkbox */
-.switch input {
+.switch .check {
   display: none;
 }
 
@@ -150,55 +183,16 @@ h1 {
   border-radius: 50%;
 }
 
-input:checked + .slider {
+.check:checked + .slider {
   background-color: var(--primary);
 }
 
-input:focus + .slider {
+.check:focus + .slider {
   box-shadow: 0 0 1px var(--primary);
 }
 
-input:checked + .slider:before {
+.check:checked + .slider:before {
   -webkit-transform: translateX(1.8rem);
   -ms-transform: translateX(1.8rem);
   transform: translateX(1.8rem);
-}
-
-.disabled {
-  opacity: 0.6;
-  
-  * { cursor: default; }
-}
-
-/* GAME INFO */
-.game-info-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1em;
-  font-size: 0.8em;
-
-  .counter {
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  #time-container { text-align: right; }
-
-}
-
-.btn-icon {
-  border-radius: 50%;
-  font-size: 0.8rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0;
-  text-align: center;
-  align-content: center;
-  align-self: center;
-
-  i {
-    display: inline-block;
-    width: 0.8rem;
-    height: 0.8rem;
-  }
 }

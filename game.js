@@ -14,15 +14,12 @@ if (savedSettings) {
   gameSettings = new GameSettings(false, false, true);
 }
 
-console.log('gameSettings', gameSettings);
-
-
 const newGame = () => {
   const board = new Board($('#sudoku-board').width());  
   board.createCells();
   console.log('board', board);
   
-  console.log(board.cells[0][3].getHtmlElement());
+  console.log(board.cells[2][6].getHtmlElement());
 }
 
 newGame();
