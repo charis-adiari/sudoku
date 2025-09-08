@@ -71,15 +71,12 @@ h1 {
   --btn-text: var(--background);
   background-color: var(--btn-bg);
   color: var(--btn-text);
-}
-
-.btn-primary {
   border: 1px solid var(--btn-bg);
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
+.btn:hover,
+.btn:focus,
+.btn:active {
   color: var(--btn-bg);
   background-color: var(--btn-text);
 }
@@ -96,15 +93,6 @@ h1 {
   .dropdown-button {
     --btn-bg: var(--background);
     --btn-text: var(--primary);
-
-    border: 1px solid var(--primary);
-  }
-
-  .dropdown-button:hover,
-  .dropdown-button:focus,
-  .dropdown-button:active {
-    color: var(--btn-bg);
-    background-color: var(--btn-text);
   }
 
   .dropdown-content {
@@ -194,4 +182,37 @@ input:checked + .slider:before {
   opacity: 0.6;
   
   * { cursor: default; }
+}
+
+/* GAME INFO */
+.game-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  font-size: 0.8em;
+
+  .counter {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  #time-container { text-align: right; }
+
+}
+
+.btn-icon {
+  border-radius: 50%;
+  font-size: 0.8rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  text-align: center;
+  align-content: center;
+  align-self: center;
+
+  i {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+  }
 }

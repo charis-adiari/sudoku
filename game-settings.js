@@ -6,7 +6,7 @@ export class GameSettings {
       nightMode: nightMode
     };
 
-    // TODO: use this.settings to set initial values of checkbox
+    // TODO: use this.settings to set initial values of checkbox, leave for now; start on actual game
 
     this.toggleTrainingWheels();
     this.toggleTrackMistakes();
@@ -19,7 +19,7 @@ export class GameSettings {
 
   toggleTrainingWheels() {
     if (!$('#training-wheels').is(':checked')) {
-      $('.inner-toggle').addClass('disabled');
+      $('#inner-toggle').addClass('disabled');
       $('#track-mistakes').prop('checked', false);
       $('#track-mistakes').attr('disabled', true);
       

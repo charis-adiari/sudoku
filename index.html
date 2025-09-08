@@ -45,7 +45,7 @@
               <span class="slider"></span>
             </span>
           </label>
-          <label class="label inner-toggle">Track mistakes
+          <label id="inner-toggle" class="label inner-toggle">Track mistakes
             <span class="switch">
               <input id="track-mistakes" type="checkbox" name="track-mistakes" class="check">
               <span class="slider"></span>
@@ -61,6 +61,24 @@
       </div>
     </div>
   </header>
+
+  <main>
+    <div class="game-info-container">
+      <div id="mistake-container">
+        Mistakes <br/>
+        <span id="mistake-counter" class="counter">0</span>
+      </div>
+
+      <button id="pause" class="btn btn-icon">
+        <i class="bi bi-pause-fill"></i>
+      </button>
+
+      <div id="time-container">
+        Time <br/>
+        <span id="mistake-counter" class="counter">01:23:49</span>
+      </div>
+    </div>
+  </main>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script type="module" src="game.js"></script>
