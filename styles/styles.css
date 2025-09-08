@@ -1,18 +1,4 @@
-:root[data-theme="light"] {
-  --text: #211622;
-  --background: #f4f6f4;
-  --primary: #6a4c94;
-  --secondary: #7b85a3;
-  --accent: #aa4157;
-}
-
-:root[data-theme="dark"] {
-  --text: #e8dde9;
-  --background: #090b09;
-  --primary: #896bb3;
-  --secondary: #5c6684;
-  --accent: #be556c;
-}
+@import url('variables.css');
 
 html {
   font-size: 16px;

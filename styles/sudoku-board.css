@@ -1,0 +1,21 @@
+@import url('variables.css');
+
+#sudoku-board {
+  border: 2px solid var(--text);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  width: 100%;
+  margin: 0.5em auto;
+  aspect-ratio: 1;
+}
+
+.cell {
+  border-right: 1px solid var(--secondary-700);
+  border-bottom: 1px solid var(--secondary-700);
+  display: inline-block;
+  font-size: 1.5rem;
+  text-align: center;
+  align-content: center;
+}
