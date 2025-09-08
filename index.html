@@ -14,8 +14,8 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-  <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/sudoku-board.css">
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
 
 <body>
@@ -76,11 +76,18 @@
 
       <div id="time-container">
         Time <br/>
-        <span id="timer" class="counter">01:23:49</span>
+        <span id="timer" class="counter">00:00</span>
       </div>
     </div>
 
-    <div id="sudoku-board"></div>
+    <div id="board-container">
+      <div id="sudoku-board"></div>
+      <div id="play" class="play-button hidden">
+        <button id="play-button" class="btn btn-icon-large">
+          <i class="bi bi-play-fill"></i>
+        </button>
+      </div>
+    </div>
   </main>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

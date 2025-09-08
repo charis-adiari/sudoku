@@ -3,6 +3,8 @@ export class Timer {
     this.seconds = 0;
     this.interval = null;
     this.isRunning = false;
+    $('#pause').on('click', () => this.#toggleTimer());
+    $('#play').on('click', () => this.#toggleTimer());
   }
 
   formatTime(totalSeconds) {
@@ -50,5 +52,17 @@ export class Timer {
     this.stopTimer();
     this.seconds = 0;
     this.updateDisplay();
+  }
+
+  #toggleTimer() {
+    if (this.isRunning) {
+      $('#pause>i').removeClass('bi bi-pause-fill').addClass('bi bi-play-fill');
+      $('#play').removeClass('hidden');
+      this.stopTimer();
+    } else {
+      $('#pause>i').removeClass('bi bi-play-fill').addClass('bi bi-pause-fill');
+      $('#play').addClass('hidden');
+      this.startTimer();
+    }
   }
 }

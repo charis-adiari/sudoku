@@ -11,6 +11,29 @@ body {
   background-color: var(--background);
 }
 
+h1 {
+  font-weight: 900;
+  text-align: center;
+  margin-top: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+#new-game-form .select {
+  outline: none;
+  border: none;
+  background-color: inherit;
+  border-bottom: 1px solid var(--primary);
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+#new-game-form #new-game {
+  margin-left: 1.5em;
+}
+
 .btn {
   all: unset;
   padding: 0.25em 0.5em;
@@ -99,12 +122,12 @@ body {
   margin-top: 1em;
   font-size: 0.8em;
 
+  #time-container { text-align: right; }
+
   .counter {
     font-size: 1rem;
     font-weight: 500;
   }
-
-  #time-container { text-align: right; }
 }
 
 .global-functions {
@@ -113,35 +136,28 @@ body {
   justify-content: space-between;
 }
 
-h1 {
-  font-weight: 900;
-  text-align: center;
-  margin-top: 0;
-}
-
-html {
-  font-size: 16px;
-}
+.hidden { display: none !important; }
 
 .label {
   margin-right: 0.25em;
 }
 
-#new-game-form .select {
-  outline: none;
-  border: none;
-  background-color: inherit;
-  border-bottom: 1px solid var(--primary);
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-#new-game-form #new-game {
-  margin-left: 1.5em;
-}
-
 
 /* TOGGLE BUTTON */
+.check:checked + .slider {
+  background-color: var(--primary);
+}
+
+.check:focus + .slider {
+  box-shadow: 0 0 1px var(--primary);
+}
+
+.check:checked + .slider:before {
+  -webkit-transform: translateX(1.8rem);
+  -ms-transform: translateX(1.8rem);
+  transform: translateX(1.8rem);
+}
+
 .switch {
   position: relative;
   display: inline-block;
@@ -180,18 +196,4 @@ html {
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
-}
-
-.check:checked + .slider {
-  background-color: var(--primary);
-}
-
-.check:focus + .slider {
-  box-shadow: 0 0 1px var(--primary);
-}
-
-.check:checked + .slider:before {
-  -webkit-transform: translateX(1.8rem);
-  -ms-transform: translateX(1.8rem);
-  transform: translateX(1.8rem);
 }

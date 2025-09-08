@@ -37,10 +37,6 @@ class Game {
     return settings;
   }
 
-  #getSettings() {
-    
-  }
-
   #applySetttings() {
 
   }
