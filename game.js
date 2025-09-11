@@ -1,6 +1,6 @@
 import { GameSettings } from "./scripts/game-settings.js";
 import { Board } from "./scripts/sudoku-board.js";
-import { Timer } from "./scripts/utils.js";
+import { Timer, toggleActive } from "./scripts/utils.js";
 
 class Game {
   constructor() {
@@ -41,6 +41,8 @@ class Game {
 
   }
 }
+
+$('#notes').on('click', () => toggleActive());
 
 const newGame = () => {
   const game = new Game();
