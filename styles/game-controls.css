@@ -12,10 +12,14 @@
   }
 }
 
-.btn-arrow, .btn-control,
-.btn-arrow:hover, .btn-control:hover,
-.btn-arrow:focus, .btn-control:focus,
-.btn-arrow:active, .btn-control:active {
+.btn-arrow,
+/* .btn-arrow:hover, */
+.btn-arrow:active,
+/* .btn-arrow:focus, */
+.btn-control,
+.btn-control:hover,
+.btn-control:active,
+.btn-control:focus {
   --btn-text: var(--secondary-600);
   --btn-bg: var(--background);
 
@@ -35,27 +39,19 @@
 }
 
 .btn-control.active {
-  --btn-text: var(--primary); 
-  /* also make icon filled */
+  --btn-text: var(--primary);
 }
 
 .btn-control.active::after {
   content: '';
   position: absolute;
-  bottom: -8px; /* Adjust this value to control distance below button */
+  bottom: -3px;
   left: 50%;
-  transform: translateX(-50%); /* Centers the dot horizontally */
+  transform: translateX(-50%);
   border-radius: 50%;
   width: 5px;
   height: 5px;
   background-color: var(--btn-text);
-}
-
-.error {
-  background-color: var(--danger);
-  border-radius: 5px;
-  padding: 0.25em 0.5em;
-  font-size: 90%;
 }
 
 .generic-controls-container {
@@ -63,4 +59,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .error {
+    background-color: var(--danger);
+    border-radius: 5px;
+    padding: 0.25em 0.5em;
+    font-size: 90%;
+  }
+}
+
+.number-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  column-gap: 0.1em;
+  aspect-ratio: 9 / 1;
+  width: 100%;
+  margin-top: 0.75em;
+
+  .btn-number {
+    text-align: center;
+  }
 }
