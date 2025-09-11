@@ -1,0 +1,66 @@
+@import url('variables.css');
+
+.arrows-container {
+  display: flex;
+  align-items: center;
+  column-gap: 0.25em;
+
+  .vertical-arrows-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.25em;
+  }
+}
+
+.btn-arrow, .btn-control,
+.btn-arrow:hover, .btn-control:hover,
+.btn-arrow:focus, .btn-control:focus,
+.btn-arrow:active, .btn-control:active {
+  --btn-text: var(--secondary-600);
+  --btn-bg: var(--background);
+
+  color: var(--btn-text);
+  background-color: var(--btn-bg);
+}
+
+.btn-arrow {
+  border: 1px solid var(--btn-text);
+  --btn-text: var(--secondary-700);
+}
+
+.btn-control {
+  padding: 0;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.btn-control.active {
+  --btn-text: var(--primary); 
+  /* also make icon filled */
+}
+
+.btn-control.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; /* Adjust this value to control distance below button */
+  left: 50%;
+  transform: translateX(-50%); /* Centers the dot horizontally */
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background-color: var(--btn-text);
+}
+
+.error {
+  background-color: var(--danger);
+  border-radius: 5px;
+  padding: 0.25em 0.5em;
+  font-size: 90%;
+}
+
+.generic-controls-container {
+  margin: 0.5em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
