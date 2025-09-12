@@ -24,19 +24,6 @@ html {
 
 select { color: var(--text); }
 
-#new-game-form .select {
-  outline: none;
-  border: none;
-  background-color: inherit;
-  border-bottom: 1px solid var(--primary);
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-#new-game-form #new-game {
-  margin-left: 1.5em;
-}
-
 .btn {
   all: unset;
   padding: 0.25em 0.5em;
@@ -202,4 +189,18 @@ select { color: var(--text); }
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
+}
+
+
+#new-game-form .select {
+  outline: none;
+  border: none;
+  background-color: inherit;
+  border-bottom: 1px solid var(--primary);
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+#new-game-form #new-game {
+  margin-left: 1.5em;
 }
