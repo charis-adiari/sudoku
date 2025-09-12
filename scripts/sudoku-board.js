@@ -9,9 +9,16 @@ export class Board {
       let row = [];
 
       for (let j = 0; j < 9; j++) {
-        row.push(
-          new Cell(i, j)
-        );
+        const cell = new Cell(i, j);
+        let hasRightBorder = false;
+        let hasBottomBorder = false;
+
+        if (i === 2 || i === 5) hasBottomBorder = true;
+        if (j === 2 || j === 5) hasRightBorder = true;
+
+        cell.createHtmlElement(hasRightBorder, hasBottomBorder);
+
+        row.push(cell);
       } 
       
       this.cells.push(row);
@@ -20,19 +27,21 @@ export class Board {
 }
 
 class Cell {
-  constructor(xCoordinate, yCoordinate) {
+  constructor(xCoordinate, yCoordinate, value = 0) {
     this.x = xCoordinate;
     this.y = yCoordinate;
-    this.value = 0;
+    this.value = value;
     this.htmlElement = document.createElement("div");
-    
-    this.#createHtmlElement();
   }
 
-  #createHtmlElement() {
-    this.htmlElement.id = `${this.x}-${this.y}`;
+  createHtmlElement(hasRightBorder = false, hasBottomBorder = false) {
+    this.htmlElement.setAttribute('data-x-coordinate', this.x);
+    this.htmlElement.setAttribute('data-y-coordinate', this.y);
     this.htmlElement.classList.add('cell');
     this.htmlElement.textContent = this.value;
+
+    if (hasRightBorder) this.htmlElement.classList.add('right-border');
+    if (hasBottomBorder) this.htmlElement.classList.add('bottom-border');
 
     $('#sudoku-board').append(this.htmlElement);
   }

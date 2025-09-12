@@ -23,6 +23,10 @@
       text-align: center;
       align-content: center;
     }
+
+    .cell.right-border { border-right: 2px solid var(--text); }
+
+    .cell.bottom-border { border-bottom: 2px solid var(--text); }
   }
 
   .play-button {
