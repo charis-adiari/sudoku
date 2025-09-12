@@ -81,3 +81,12 @@ export const toggleActive = () => {
 
   return isTakingNotes;
 };
+
+export const toggleDropdown = () => {
+  if ($('.dropdown').hasClass('active'))
+    $('.dropdown').removeClass('active');
+  else
+    $('.dropdown').addClass('active');
+
+  console.log($('.dropdown'));
+};
