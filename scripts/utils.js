@@ -83,10 +83,8 @@ export const toggleActive = () => {
 };
 
 export const toggleDropdown = () => {
-  if ($('.dropdown').hasClass('active'))
-    $('.dropdown').removeClass('active');
+  if ($('.dropdown').hasClass('show'))
+    $('.dropdown').removeClass('show');
   else
-    $('.dropdown').addClass('active');
-
-  console.log($('.dropdown'));
+    $('.dropdown').addClass('show');
 };

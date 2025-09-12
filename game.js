@@ -43,7 +43,10 @@ class Game {
 }
 
 $('#notes').on('click', () => toggleActive());
-$('#settings').on('click', () => toggleDropdown());
+$('#settings').on('click', (e) => {
+  e.stopPropagation();
+  toggleDropdown()
+});
 
 const newGame = () => {
   const game = new Game();

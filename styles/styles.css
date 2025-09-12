@@ -117,7 +117,7 @@ select { color: var(--text); }
   }
 }
 
-.dropdown.active .dropdown-content {
+.dropdown.show .dropdown-content {
   display: block;
 }
 
