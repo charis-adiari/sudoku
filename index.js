@@ -1,5 +1,5 @@
 import { Game } from "./scripts/game.js";
-import { toggleActive, toggleDropdown } from "./scripts/utils.js";
+import { toggleActive, toggleDropdown } from "./scripts/utilities/utility-functions.js";
 
 const game = new Game();
 
