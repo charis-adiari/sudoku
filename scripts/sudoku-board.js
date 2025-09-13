@@ -5,6 +5,8 @@ export class Board {
   }
 
   createCells() {
+    this.clearBoard();
+
     for (let i = 0; i < 9; i++) {
       let row = [];
 
@@ -23,6 +25,11 @@ export class Board {
       
       this.cells.push(row);
     }
+  }
+
+  clearBoard() {
+    this.cells = [];
+    $('#sudoku-board').empty();
   }
 }
 
