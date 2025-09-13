@@ -5,25 +5,7 @@
   border: 2px solid var(--text);
   margin: 0.5em auto;
 
-  .play-button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--background);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .btn-icon-large {
-      font-size: 5rem;
-      border-radius: 50%;
-    }
-  }
-
   #sudoku-board {
-    /* background-color: blue; */
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
@@ -32,7 +14,6 @@
     width: 100%;
 
     .cell {
-      /* background-color: aqua; */
       border-right: 1px solid var(--secondary-700-30);
       border-bottom: 1px solid var(--secondary-700-30);
       display: inline-block;
@@ -41,8 +22,50 @@
       align-content: center;
     }
 
-    .cell.right-border { border-right: 2px solid var(--text); }
+    .cell.right-border {
+      border-right: 2px solid var(--text);
+    }
 
-    .cell.bottom-border { border-bottom: 2px solid var(--text); }
+    .cell.bottom-border {
+      border-bottom: 2px solid var(--text);
+    }
+  }
+}
+
+.loading-container,
+.play-button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-container .loader {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--text);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+.play-button-container .btn-icon-large {
+  font-size: 5rem;
+  border-radius: 50%;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

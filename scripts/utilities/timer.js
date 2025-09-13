@@ -15,9 +15,20 @@ export class Timer {
   }
 
   reset() {
-    this.#stopTimer();
+    this.stopTimer();
     this.seconds = 0;
     this.#updateDisplay();
+  }
+
+  /**
+   * Stops timer without resetting time
+   */
+  stopTimer() {
+    if (this.isRunning) {
+      this.isRunning = false;
+      clearInterval(this.interval);
+      this.interval = null;
+    }
   }
 
   #formatTime(totalSeconds) {
@@ -48,19 +59,11 @@ export class Timer {
     }
   }
 
-  #stopTimer() {
-    if (this.isRunning) {
-      this.isRunning = false;
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-  }
-
   #toggleTimer(isRunning) {
     if (isRunning) {
       $('#pause>i').removeClass('bi bi-pause-fill').addClass('bi bi-play-fill');
       $('#play').removeClass('hidden');
-      this.#stopTimer();
+      this.stopTimer();
     } else {
       $('#pause>i').removeClass('bi bi-play-fill').addClass('bi bi-pause-fill');
       $('#play').addClass('hidden');

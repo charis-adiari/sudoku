@@ -6,6 +6,7 @@ import { SudokuGenerator } from "./utilities/sudoku-generator.js";
 
 export class Game {
   constructor() {
+    this.isLoading = true;
     this.settings = this.initSettings();
     this.board = new Board($('#sudoku-board').width());
     this.timer = new Timer();
@@ -17,13 +18,22 @@ export class Game {
     this.solutionString = '';
     this.puzzleArray = [];
     this.solutionArray = [];
+
+    this.#toggleLoading();
   }
 
   startNewGame(level = 'easy') {
+    this.isLoading = true;
+    this.#toggleLoading();
+    this.stopGame();
+
     this.settings = this.initSettings();
     this.level = level;
 
     this.#setPuzzle();
+    
+    this.isLoading = false;
+    this.#toggleLoading();
     this.timer.restartTimer();
   }
 
@@ -44,6 +54,10 @@ export class Game {
     return settings;
   }
 
+  stopGame() {
+    this.timer.stopTimer();
+  }
+
   #setPuzzle() {
     let seed;
     
@@ -61,5 +75,10 @@ export class Game {
 
   #getSetttingsFromLocalStorage() {
     return JSON.parse(localStorage.getItem('game-settings'));
+  }
+
+  #toggleLoading() {
+    if (this.isLoading) $('#loading').removeClass('hidden');
+    else $('#loading').addClass('hidden');
   }
 }
