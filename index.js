@@ -7,7 +7,6 @@ const game = new Game();
 const newGame = () => {
   game.startNewGame();
   const level = $('#level').val();
-  console.log('level: ' + level);
 
   game.settings = game.initSettings();
 }

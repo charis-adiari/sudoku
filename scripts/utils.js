@@ -3,11 +3,24 @@ export class Timer {
     this.seconds = 0;
     this.interval = null;
     this.isRunning = false;
-    $('#pause').on('click', () => this.#toggleTimer());
-    $('#play').on('click', () => this.#toggleTimer());
+    $('#pause').on('click', () => this.#toggleTimer(this.isRunning));
+    $('#play').on('click', () => this.#toggleTimer(this.isRunning));
   }
 
-  formatTime(totalSeconds) {
+  restartTimer() {
+    if (!this.isRunning) this.#toggleTimer(false); //play if paused
+
+    this.reset();
+    this.#startTimer();
+  }
+
+  reset() {
+    this.#stopTimer();
+    this.seconds = 0;
+    this.#updateDisplay();
+  }
+
+  #formatTime(totalSeconds) {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
@@ -21,21 +34,21 @@ export class Timer {
     }
   }
 
-  updateDisplay() {
-    $('#timer').text(this.formatTime(this.seconds));
+  #updateDisplay() {
+    $('#timer').text(this.#formatTime(this.seconds));
   }
 
-  startTimer() {
+  #startTimer() {
     if (!this.isRunning) {
       this.isRunning = true;
       this.interval = setInterval(() => {
         this.seconds++;
-        this.updateDisplay();
+        this.#updateDisplay();
       }, 1000);
     }
   }
 
-  stopTimer() {
+  #stopTimer() {
     if (this.isRunning) {
       this.isRunning = false;
       clearInterval(this.interval);
@@ -43,26 +56,15 @@ export class Timer {
     }
   }
 
-  restartTimer() {
-    this.reset();
-    this.startTimer();
-  }
-
-  reset() {
-    this.stopTimer();
-    this.seconds = 0;
-    this.updateDisplay();
-  }
-
-  #toggleTimer() {
-    if (this.isRunning) {
+  #toggleTimer(isRunning) {
+    if (isRunning) {
       $('#pause>i').removeClass('bi bi-pause-fill').addClass('bi bi-play-fill');
       $('#play').removeClass('hidden');
-      this.stopTimer();
+      this.#stopTimer();
     } else {
       $('#pause>i').removeClass('bi bi-play-fill').addClass('bi bi-pause-fill');
       $('#play').addClass('hidden');
-      this.startTimer();
+      this.#startTimer();
     }
   }
 }

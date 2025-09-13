@@ -8,6 +8,7 @@ export class Game {
     this.settings = this.initSettings();
     this.board = new Board($('#sudoku-board').width());
     this.timer = new Timer();
+    this.mistakeCount = 0;
   }
 
   startNewGame() {
