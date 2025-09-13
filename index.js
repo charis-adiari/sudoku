@@ -1,14 +1,11 @@
 import { Game } from "./scripts/game.js";
-import { easySeed, mediumSeed, hardSeed } from "./seed.js";
 import { toggleActive, toggleDropdown } from "./scripts/utils.js";
 
 const game = new Game();
 
 const newGame = () => {
-  game.startNewGame();
   const level = $('#level').val();
-
-  game.settings = game.initSettings();
+  game.startNewGame(level);
 }
 
 newGame();

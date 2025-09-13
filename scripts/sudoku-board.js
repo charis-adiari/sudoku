@@ -12,14 +12,7 @@ export class Board {
 
       for (let j = 0; j < 9; j++) {
         const cell = new Cell(i, j);
-        let hasRightBorder = false;
-        let hasBottomBorder = false;
-
-        if (i === 2 || i === 5) hasBottomBorder = true;
-        if (j === 2 || j === 5) hasRightBorder = true;
-
-        cell.createHtmlElement(hasRightBorder, hasBottomBorder);
-
+        cell.createHtmlElement(j === 2 || j === 5, i === 2 || i === 5);
         row.push(cell);
       } 
       

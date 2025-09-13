@@ -8,11 +8,21 @@ export class Game {
     this.settings = this.initSettings();
     this.board = new Board($('#sudoku-board').width());
     this.timer = new Timer();
+
+    this.level = 'easy';
     this.mistakeCount = 0;
+
+    this.puzzle = [];
+    this.solution = [];
   }
 
-  startNewGame() {
+  startNewGame(level = 'easy') {
+    this.settings = this.initSettings();
+    this.level = level;
+
     this.#createBoard();
+    this.#seedBoard();
+
     this.timer.restartTimer();
   }
 
@@ -39,8 +49,20 @@ export class Game {
     console.log(this.board.cells[2][6].getHtmlElement());
   }
 
-  #clearBoard() {
-    
+  #seedBoard() {
+    let seed;
+
+    if (this.level === 'easy') seed = easySeed[Math.floor(Math.random() * easySeed.length)];
+    else if (this.level === 'medium') seed = mediumSeed[Math.floor(Math.random() * mediumSeed.length)];
+    else seed = hardSeed[Math.floor(Math.random() * hardSeed.length)];
+
+    this.puzzle = this.#parseSudokuString(seed.puzzle);
+  }
+
+  #parseSudokuString(sudokuString) {
+    return sudokuString.match(/.{9}/g).map(row =>
+      row.split('').map(digit => parseInt(digit))
+    );
   }
 
   #getSetttingsFromLocalStorage() {
