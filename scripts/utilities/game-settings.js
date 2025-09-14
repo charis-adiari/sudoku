@@ -12,10 +12,11 @@ export class GameSettings {
       this.nightMode = savedSettings.nightMode;
     }
 
-    console.log(`Training wheels: ${this.trainingWheels}, show mistakes: ${this.showMistakes} and night mode: ${this.nightMode}`)
+    this.#initToggleDisplays();
 
-    this.#applyTrainingWheels(); // TODO: use this.settings to set initial values of checkbox; can't just call apply functions because they work off of current checkbox state not local storage / defaults
-
+    this.#applyTrainingWheels();
+    this.#applyShowMistakes();
+    this.#applyNightMode();
     $('#training-wheels').on('change', () => this.#applyTrainingWheels());
     $('#show-mistakes').on('change', () => this.#applyShowMistakes());
     $('#night-mode').on('change', () => this.#applyNightMode());
@@ -69,5 +70,23 @@ export class GameSettings {
 
   #getSettingsFromLocalStorage() {
     return JSON.parse(localStorage.getItem('game-settings'))
+  }
+
+  #initToggleDisplays() {
+    if (this.trainingWheels) {
+      $('#training-wheels').prop('checked', true);
+
+      if (this.showMistakes) $('#show-mistakes').prop('checked', true);
+      else $('#show-mistakes').prop('checked', false);
+    }
+    else {
+      $('#training-wheels').prop('checked', false);
+      $('#inner-toggle').addClass('disabled');
+      $('#show-mistakes').prop('checked', false);
+      $('#show-mistakes').attr('disabled', true);
+    }
+
+    if (this.nightMode) $('#night-mode').prop('checked', true);
+    else $('#night-mode').prop('checked', false);
   }
 }
