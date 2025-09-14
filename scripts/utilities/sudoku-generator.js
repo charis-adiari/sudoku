@@ -20,11 +20,11 @@ export class SudokuGenerator {
   }
 
   /**
- * Generates a valid sudoku board by performing random transformations on a valid seed board
- * @param {string} puzzleString - Sudoku board as a string of 81 characters with 0 in the place of nulls
- * @param {string} solutionString - Complete sudoku solution as a string of 81 characters
- * @returns {{puzzle: number[][], solution: number[][]}} Object containing transformed puzzle and solution as 2D arrays
- */
+   * Generates a valid sudoku board by performing random transformations on a valid seed board
+   * @param {string} puzzleString - Sudoku puzzle as a string of 81 characters with 0 in the place of nulls
+   * @param {string} solutionString - Complete sudoku solution as a string of 81 characters
+   * @returns {{puzzle: number[][], solution: number[][]}} Object containing transformed puzzle and solution as 2D arrays
+   */
   static generateSudoku(puzzleString, solutionString) {
     const puzzleArray = this.parseSudokuString(puzzleString);
     const solutionArray = this.parseSudokuString(solutionString);
@@ -33,31 +33,42 @@ export class SudokuGenerator {
     const rotations = rotationWeights[Math.floor(Math.random() * rotationWeights.length)];
     console.log(`Rotating ${rotations} times`);
 
-    let transformedPuzzle = puzzleArray;
-    let transformedSolution = solutionArray;
-
-    for (let i = 0; i < rotations; i++) {
-      transformedPuzzle = this.#rotateSudoku(transformedPuzzle);
-      transformedSolution = this.#rotateSudoku(transformedSolution);
-    }
+    const transformedSudoku = this.#rotateSudoku(puzzleArray, solutionArray, rotations);
 
     return {
-      puzzle: transformedPuzzle,
-      solution: transformedSolution
+      puzzle: transformedSudoku.rotatedPuzzle,
+      solution: transformedSudoku.rotatedSolution
     };
   }
 
   /**
-   * Rotates 2D sudoku array by 90 degrees
-   * @param {number[][]} sudokuArray - Sudoku board consisiting of 9 arrays with 9 numbers each. 0 should be used in place of nulls
-   * @returns {number[][]} Sudoku board with all numbers rotated 90 degrees
+   * Rotates sudoku board by 90 degrees a specified number of times
+   * @param {number[][]} puzzleArray - Sudoku puzzle as 2D array with 0 used in place of nulls
+   * @param {number[][]} solutionArray - Complete sudoku solution as 2D array
+   * @param {number} noRotations - No of times to rotate the puzzle (between 0 and 3)
+   * @returns {{rotatedPuzzle: number[][], rotatedSolution: number[][]}} object containing rotated puzzle and solution as 2D arrays
    */
-  static #rotateSudoku(sudokuArray) {
+  static #rotateSudoku(puzzleArray, solutionArray, noRotations) {
     const size = 9;
-    
-    return Array.from({ length: size }, (_, i) =>
-      Array.from({ length: 9 }, (_, j) =>
-        sudokuArray[size - 1 - j][i]
-      ));
+
+    let transformedPuzzle = puzzleArray;
+    let transformedSolution = solutionArray;
+
+    for (let i = 0; i < noRotations; i++) {
+      transformedPuzzle = Array.from({ length: size }, (_, i) =>
+        Array.from({ length: 9 }, (_, j) =>
+          transformedPuzzle[size - 1 - j][i]
+        ));
+
+      transformedSolution = Array.from({ length: size }, (_, i) =>
+        Array.from({ length: 9 }, (_, j) =>
+          transformedSolution[size - 1 - j][i]
+        ));
+    }
+
+    return {
+      rotatedPuzzle: transformedPuzzle,
+      rotatedSolution: transformedSolution
+    };
   }
 }
