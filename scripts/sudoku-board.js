@@ -8,22 +8,18 @@ export class Board {
 
   /**
    * Creates cells from array
-   * @param {[][]} sudokuArray - Sudoku board as an array consisiting of 9 arrays with 9 numbers each. 0 should be used in place of nulls
+   * @param {number[][]} sudokuArray - Sudoku board as a 2D array. 0 should be used in place of nulls
    */
   createCellsFromArray(sudokuArray) {
     this.clearBoard();
 
-    for (let i = 0; i < 9; i++) {
-      let row = [];
-
-      for (let j = 0; j < 9; j++) {
+    this.cells = Array.from({ length: 9}, (_, i) => 
+      Array.from({ length: 9 }, (_, j) => {
         const cell = new Cell(i, j, sudokuArray[i][j]);
         cell.createHtmlElement(j === 2 || j === 5, i === 2 || i === 5);
-        row.push(cell);
-      } 
-      
-      this.cells.push(row);
-    }
+        return cell;
+      })
+    );
   }
 
   clearBoard() {
