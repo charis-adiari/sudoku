@@ -7,7 +7,7 @@ import { SudokuGenerator } from "./utilities/sudoku-generator.js";
 export class Game {
   constructor() {
     this.isLoading = true;
-    this.settings = this.initSettings();
+    this.settings = this.#initSettings();
     this.board = new Board($('#sudoku-board').width());
     this.timer = new Timer();
 
@@ -25,7 +25,6 @@ export class Game {
     this.#toggleLoading();
     this.stopGame();
 
-    this.settings = this.initSettings();
     this.level = level;
 
     this.#setPuzzle();
@@ -33,23 +32,6 @@ export class Game {
     this.isLoading = false;
     this.#toggleLoading();
     this.timer.restartTimer();
-  }
-
-  initSettings() {
-    const savedSettings = this.#getSetttingsFromLocalStorage();
-    let settings;
-
-    if (savedSettings) {
-      settings = new GameSettings(
-        savedSettings.trainingWheels,
-        savedSettings.trackMistakes,
-        savedSettings.nightMode
-      );
-    } else {
-      settings = new GameSettings(false, false, true);
-    }
-
-    return settings;
   }
 
   stopGame() {
@@ -70,8 +52,16 @@ export class Game {
     this.board.createCellsFromArray(this.puzzleArray);
   }
 
-  #getSetttingsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('game-settings'));
+  #initSettings() {
+    const savedSettings = this.#getSettingsFromLocalStorage();
+    
+    if (savedSettings)
+      return new GameSettings(savedSettings.trainingWheels, savedSettings.showMistakes, savedSettings.nightMode);
+    else return new GameSettings();
+  }
+
+  #getSettingsFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('game-settings'))
   }
 
   #toggleLoading() {

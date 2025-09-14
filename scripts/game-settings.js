@@ -1,52 +1,67 @@
 export class GameSettings {
-  constructor(trainingWheels, trackMistakes, nightMode) {
-    this.settings = {
-      trainingWheels: trainingWheels,
-      trackMistakes: trackMistakes,
-      nightMode: nightMode
-    };
+  /**
+   * Initialises game settings
+   * @param {boolean | null | undefined} trainingWheels - Determines whether or not mistakes should be higlighted immediately
+   * @param {boolean | null | undefined} showMistakes - Determines whether or not to display the number of mistakes made. If trainingWheels is false, this must be false as well
+   * @param {boolean | null | undefined} nightMode - Determines whether the page should use the night colour theme
+   */
+  constructor(trainingWheels, showMistakes, nightMode) {
+    this.trainingWheels = trainingWheels ?? false;
+    this.showMistakes = showMistakes ?? false;
+    this.nightMode = nightMode ?? true;
 
-    // TODO: use this.settings to set initial values of checkbox, leave for now; start on actual game
+    console.log(`Training wheels: ${this.trainingWheels}, show mistakes: ${this.showMistakes} and night mode: ${this.nightMode}`)
 
-    this.toggleTrainingWheels();
+    this.#applyTrainingWheels(); // TODO: use this.settings to set initial values of checkbox; can't just call apply functions because they work off of current checkbox state not local storage / defaults
 
-    $('#training-wheels').on('change', () => this.toggleTrainingWheels());
-    $('#track-mistakes').on('change', () => this.toggleTrackMistakes());
-    $('#night-mode').on('change', () => this.toggleNightMode());
+    $('#training-wheels').on('change', () => this.#applyTrainingWheels());
+    $('#show-mistakes').on('change', () => this.#applyShowMistakes());
+    $('#night-mode').on('change', () => this.#applyNightMode());
   }
 
-  toggleTrainingWheels() {
+  #applyTrainingWheels() {
     if (!$('#training-wheels').is(':checked')) {
       $('#inner-toggle').addClass('disabled');
-      $('#track-mistakes').prop('checked', false);
-      $('#track-mistakes').attr('disabled', true);
+      $('#show-mistakes').prop('checked', false);
+      $('#show-mistakes').attr('disabled', true);
       
       this.#saveSetting('trainingWheels', false);
-      this.#saveSetting('trackMistakes', false);
+      this.#applyShowMistakes();
     }
     else {
       $('.inner-toggle').removeClass('disabled');
-      $('#track-mistakes').attr('disabled', false);
+      $('#show-mistakes').attr('disabled', false);
       this.#saveSetting('trainingWheels', true);
     }
   };
 
-  toggleTrackMistakes() {
-    if ($('#track-mistakes').is(':checked'))
-      this.#saveSetting('trackMistakes', true);
-    else
-      this.#saveSetting('trackMistakes', false);
+  #applyShowMistakes() {
+    if ($('#show-mistakes').is(':checked')) {
+      $('#mistake-container').css('opacity', '1');
+      this.#saveSetting('showMistakes', true);
+    }
+    else {
+      $('#mistake-container').css('opacity', '0');
+      this.#saveSetting('showMistakes', false);
+    }
   };
 
-  toggleNightMode() {
-    if ($('#night-mode').is(':checked'))
+  #applyNightMode() {
+    if ($('#night-mode').is(':checked')) {
+      document.documentElement.setAttribute('data-theme', 'dark');
       this.#saveSetting('nightMode', true);
-    else
+    }
+    else {
+      document.documentElement.setAttribute('data-theme', 'light');
       this.#saveSetting('nightMode', false);
+    }
   };
 
-  #saveSetting(key, value) {
-    this.settings[key] = value;
-    localStorage.setItem('game-settings', JSON.stringify(this.settings));
+  #saveSetting(setting, value) {
+    if (setting === 'trainingWheels') this.trainingWheels = value;
+    else if (setting === 'showMistakes') this.showMistakes = value;
+    else this.nightMode = value;
+
+    localStorage.setItem('game-settings', JSON.stringify(this));
   }
 }
