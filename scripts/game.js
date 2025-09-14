@@ -14,8 +14,6 @@ export class Game {
     this.level = 'easy';
     this.mistakeCount = 0;
 
-    this.puzzleString = '';
-    this.solutionString = '';
     this.puzzleArray = [];
     this.solutionArray = [];
 
@@ -65,10 +63,9 @@ export class Game {
     else if (this.level === 'medium') seed = mediumSeed[Math.floor(Math.random() * mediumSeed.length)];
     else seed = hardSeed[Math.floor(Math.random() * hardSeed.length)];
     
-    this.puzzleString = seed.puzzle;
-    this.solutionString = seed.solution;
-    this.puzzleArray = SudokuGenerator.parseSudokuString(this.puzzleString);
-    this.solutionArray = SudokuGenerator.parseSudokuString(this.solutionString);
+    const transformedSudoku = SudokuGenerator.generateSudoku(seed.puzzle, seed.solution);
+    this.puzzleArray = transformedSudoku.puzzle;
+    this.solutionArray = transformedSudoku.solution;
     
     this.board.createCellsFromArray(this.puzzleArray);
   }
