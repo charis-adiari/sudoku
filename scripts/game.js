@@ -7,7 +7,7 @@ import { SudokuGenerator } from "./utilities/sudoku-generator.js";
 export class Game {
   constructor() {
     this.isLoading = true;
-    this.settings = this.#initSettings();
+    this.settings = new GameSettings();
     this.board = new Board($('#sudoku-board').width());
     this.timer = new Timer();
 
@@ -50,18 +50,6 @@ export class Game {
     this.solutionArray = transformedSudoku.solution;
     
     this.board.createCellsFromArray(this.puzzleArray);
-  }
-
-  #initSettings() {
-    const savedSettings = this.#getSettingsFromLocalStorage();
-    
-    if (savedSettings)
-      return new GameSettings(savedSettings.trainingWheels, savedSettings.showMistakes, savedSettings.nightMode);
-    else return new GameSettings();
-  }
-
-  #getSettingsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('game-settings'))
   }
 
   #toggleLoading() {

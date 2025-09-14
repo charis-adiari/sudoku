@@ -1,14 +1,16 @@
 export class GameSettings {
-  /**
-   * Initialises game settings
-   * @param {boolean | null | undefined} trainingWheels - Determines whether or not mistakes should be higlighted immediately
-   * @param {boolean | null | undefined} showMistakes - Determines whether or not to display the number of mistakes made. If trainingWheels is false, this must be false as well
-   * @param {boolean | null | undefined} nightMode - Determines whether the page should use the night colour theme
-   */
-  constructor(trainingWheels, showMistakes, nightMode) {
-    this.trainingWheels = trainingWheels ?? false;
-    this.showMistakes = showMistakes ?? false;
-    this.nightMode = nightMode ?? true;
+  constructor() {
+    this.trainingWheels = false;
+    this.showMistakes = false;
+    this.nightMode = true;
+
+    const savedSettings = this.#getSettingsFromLocalStorage();
+    
+    if (savedSettings) {
+      this.trainingWheels = savedSettings.trainingWheels;
+      this.showMistakes = savedSettings.showMistakes;
+      this.nightMode = savedSettings.nightMode;
+    }
 
     console.log(`Training wheels: ${this.trainingWheels}, show mistakes: ${this.showMistakes} and night mode: ${this.nightMode}`)
 
@@ -63,5 +65,9 @@ export class GameSettings {
     else this.nightMode = value;
 
     localStorage.setItem('game-settings', JSON.stringify(this));
+  }
+
+  #getSettingsFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('game-settings'))
   }
 }
