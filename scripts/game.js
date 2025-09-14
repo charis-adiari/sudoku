@@ -1,4 +1,4 @@
-import { GameSettings } from "./game-settings.js";
+import { GameSettings } from "./utilities/game-settings.js";
 import { Board } from "./sudoku-board.js";
 import { easySeed, mediumSeed, hardSeed } from "../seed.js";
 import { Timer } from "./utilities/timer.js";
