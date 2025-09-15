@@ -14,20 +14,19 @@ export class SudokuRandomiser {
    * @param {string} solutionString - Complete sudoku solution as a string of 81 characters
    * @returns {{puzzle: number[][], solution: number[][]}} Object containing transformed puzzle and solution as 2D arrays
    */
-  static generateSudoku(puzzleString, solutionString) {
+  static randomiseSudoku(puzzleString, solutionString) {
     const puzzleArray = this.#parseSudokuString(puzzleString);
     const solutionArray = this.#parseSudokuString(solutionString);
 
     const rotationWeights = [0, 1, 1, 2, 2, 3, 3]; //less likely to be rotated 0 times
     const rotations = rotationWeights[Math.floor(Math.random() * rotationWeights.length)];
-    console.log(`Rotating ${rotations} times`);
 
     const rotatedSudoku = this.#rotateSudoku(puzzleArray, solutionArray, rotations);
-    const swappedSudoku = this.#swapNumbers(rotatedSudoku.rotatedPuzzle, rotatedSudoku.rotatedSolution)
+    const finalSudoku = this.#swapNumbers(rotatedSudoku.puzzle, rotatedSudoku.solution)
 
     return {
-      puzzle: swappedSudoku.swappedPuzzle,
-      solution: swappedSudoku.swappedSolution
+      puzzle: finalSudoku.puzzle,
+      solution: finalSudoku.solution
     };
   }
 
@@ -61,8 +60,8 @@ export class SudokuRandomiser {
     }
 
     return {
-      rotatedPuzzle: transformedPuzzle,
-      rotatedSolution: transformedSolution
+      puzzle: transformedPuzzle,
+      solution: transformedSolution
     };
   }
 
@@ -83,8 +82,8 @@ export class SudokuRandomiser {
     );
 
     return {
-      swappedPuzzle: shuffledPuzzle,
-      swappedSolution: shuffledSolution
+      puzzle: shuffledPuzzle,
+      solution: shuffledSolution
     }
   }
 

@@ -45,7 +45,7 @@ export class Game {
     else if (this.level === 'medium') seed = mediumSeed[Math.floor(Math.random() * mediumSeed.length)];
     else seed = hardSeed[Math.floor(Math.random() * hardSeed.length)];
     
-    const transformedSudoku = SudokuRandomiser.generateSudoku(seed.puzzle, seed.solution);
+    const transformedSudoku = SudokuRandomiser.randomiseSudoku(seed.puzzle, seed.solution);
     this.puzzleArray = transformedSudoku.puzzle;
     this.solutionArray = transformedSudoku.solution;
     
