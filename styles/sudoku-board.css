@@ -29,6 +29,10 @@
     .cell.bottom-border {
       border-bottom: 2px solid var(--text);
     }
+
+    .cell.selected-highlight { background-color: var(--primary-300); }
+
+    .cell.secondary-highlight { background-color: var(--primary-100); }
   }
 }
 

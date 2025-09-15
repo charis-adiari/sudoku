@@ -1,7 +1,7 @@
 export class Cell {
-  constructor(xCoordinate, yCoordinate, value = 0) {
-    this.x = xCoordinate;
-    this.y = yCoordinate;
+  constructor(row, column, value = 0) {
+    this.row = row;
+    this.column = column;
     this.value = value;
     this.htmlElement = document.createElement("div");
     this.isGiven = value !== 0;
@@ -9,8 +9,8 @@ export class Cell {
   }
 
   createHtmlElement(hasRightBorder = false, hasBottomBorder = false) {
-    this.htmlElement.setAttribute('data-x-coordinate', this.x);
-    this.htmlElement.setAttribute('data-y-coordinate', this.y);
+    this.htmlElement.setAttribute('data-x-coordinate', this.row);
+    this.htmlElement.setAttribute('data-y-coordinate', this.column);
     this.htmlElement.classList.add('cell');
     this.htmlElement.textContent = this.value === '0' || this.value === 0 ? '' : this.value;
 
