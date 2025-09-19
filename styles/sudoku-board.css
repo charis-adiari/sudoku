@@ -30,9 +30,11 @@
       border-bottom: 2px solid var(--text);
     }
 
-    .cell.selected-highlight { background-color: var(--primary-300); }
+    .cell.selected-highlight { background-color: var(--primary-500); }
 
     .cell.secondary-highlight { background-color: var(--primary-200); }
+    
+    .cell.same-value-highlight { background-color: var(--primary-300-85); }
   }
 }
 

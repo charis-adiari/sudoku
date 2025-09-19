@@ -38,69 +38,56 @@ export class Board {
   }
 
   #selectCell(cell) {
-    $('.cell').removeClass('selected-highlight').removeClass('secondary-highlight');
+    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
 
     cell.htmlElement.classList.add('selected-highlight');
 
-    this.#highlightRow(cell.row, cell.column, ['secondary-highlight']);
-    this.#highlightColumn(cell.row, cell.column, ['secondary-highlight']);
-    this.#highlightBlock(cell.row, cell.column, ['secondary-highlight']);
+    this.#addHighlights(cell.row, cell.column, ['same-value-highlight'], ['secondary-highlight']);
   }
 
   /**
-   * Applies CSS classes to all cells in a specific row except the selected cell
-   * @param {number} row - Index of row
-   * @param {number} col - Index of column
-   * @param {string[]} classes - Classes to be applied
+   * Applies CSS classes to all cells in the same row, column and block and cells with the same value 
+   * except the selected cell
+   * @param {number} selectedRow - Index of selected cell row
+   * @param {number} selectedCol - Index of selected cell column
+   * @param {string[]} sameValueClasses - Classes to be applied on cells with the same value as the selected cell
+   * @param {string[]} sameValueClasses - Classes to be applied on cells in the same block, row, or column
    */
-  #highlightRow(row, col, classes) {
-    for (let i = 0; i < 9; i++) {
-      if (i === col) continue;
+  #addHighlights(selectedRow, selectedCol, sameValueClasses, secondaryClasses) {
+    const selectedCellValue = this.cells[selectedRow][selectedCol].value;
+    
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        const currentCell = this.cells[row][col];
 
-      this.cells[row][i].htmlElement.classList.add(...classes)
-    }
-  }
+        if (row === selectedRow && col === selectedCol) continue;
 
-  /**
-   * Applies CSS classes to all cells in a specific column except the selected cell
-   * @param {number} row - Index of row
-   * @param {number} col - Index of column
-   * @param {string[]} classes - Classes to be applied
-   */
-  #highlightColumn(row, col, classes) {
-    for (let i = 0; i < 9; i++) {
-      if (i === row) continue;
-
-      this.cells[i][col].htmlElement.classList.add(...classes)
-    }
-  }
-
-  /**
-   * Applies CSS classes to all cells in a specific block except the selected cell
-   * @param {number} row - Index of row
-   * @param {number} col - Index of column
-   * @param {string[]} classes - Classes to be applied
-   */
-  #highlightBlock(row, col, classes) {
-    const blockStart = this.#getBlockStart(row, col);
-    const blockEndRow = blockStart.row + 3;
-    const blockEndCol = blockStart.col + 3;
-
-    for (let i = blockStart.row; i < blockEndRow; i++) {
-      for (let j = blockStart.col; j < blockEndCol; j++) {
-        if (i === row && j === col) continue;
-        
-        this.cells[i][j].htmlElement.classList.add(...classes)
+        if (selectedCellValue !== 0 && selectedCellValue === currentCell.value)
+          currentCell.htmlElement.classList.add(...sameValueClasses);
+        else if (this.#inSameBlock(selectedRow, selectedCol, row, col))
+          currentCell.htmlElement.classList.add(...secondaryClasses);
+        else if (row === selectedRow) currentCell.htmlElement.classList.add(...secondaryClasses);
+        else if (col === selectedCol) currentCell.htmlElement.classList.add(...secondaryClasses);
       }
+      
     }
   }
 
-  #getBlockStart(row, col) {
-    const blockSize = 3;
-    const blockStartRow = Math.floor(row / blockSize) * blockSize;
-    const blockStartCol = Math.floor(col / blockSize) * blockSize;
+  /**
+   * Checks if 2 cells are in the same block
+   * @param {number} row1 Row index of the first cell 
+   * @param {number} col1 Column index of the first cell
+   * @param {number} row2 Row index of the second cell
+   * @param {number} col2 Column index of the second cell
+   * @returns {boolean} Whether or not the 2 cells are in the same block
+   */
+  #inSameBlock(row1, col1, row2, col2) {
+    const block1Row = Math.floor(row1 / 3);
+    const block1Col = Math.floor(col1 / 3);
+    const block2Row = Math.floor(row2 / 3);
+    const block2Col = Math.floor(col2 / 3);
 
-    return { row: blockStartRow, col: blockStartCol };
+    return block1Row === block2Row && block1Col === block2Col;
   }
 
   #clearBoard() {
