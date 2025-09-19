@@ -32,7 +32,7 @@
 
     .cell.selected-highlight { background-color: var(--primary-300); }
 
-    .cell.secondary-highlight { background-color: var(--primary-100); }
+    .cell.secondary-highlight { background-color: var(--primary-200); }
   }
 }
 

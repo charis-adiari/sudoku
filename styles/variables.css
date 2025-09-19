@@ -7,7 +7,7 @@
   --background: #f4f6f4;
 
   --primary: #6a4c94;
-  --primary-100: #e4ddee;
+  --primary-200: #e4ddee;
   --primary-300: #ae9acb;
   
   --secondary: #7b85a3;
@@ -23,8 +23,9 @@
   --background: #090b09;
 
   --primary: #896bb3;
-  --primary-100: #181122;
-  --primary-300: #483465;
+  --primary-200: #302343;
+  /* this is primary-400, so it has more contrast with primary-200 on screens with the brightness turned down*/
+  --primary-300: #614587;
 
   --secondary: #5c6684;
   --secondary-600: #8790ab;
