@@ -65,24 +65,14 @@ export class Game {
   }
 
   #handleNumberButtonClick(e) {
-    if (!this.board.selectedCell) {
-      this.#toggleError();
-      return;
-    }
+    if (!this.board.selectedCell) return;
 
     const id = e.target.id;
     const newValue = parseInt(id.charAt(id.length - 1));
 
     if (!this.board.selectedCell.isGiven) {
       this.board.setCellValue(newValue);
-      this.board.selectCell();
+      this.board.setSelectedCell(this.board.selectedCell.row, this.board.selectedCell.column);
     }
-  }
-
-  #toggleError(hasError = true) {
-    if (hasError)
-      $('.error').removeClass('hidden');
-    else
-      $('.error').addClass('hidden');
   }
 }

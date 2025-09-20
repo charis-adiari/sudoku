@@ -16,8 +16,8 @@
   --highlight: rgba(51, 122, 184, 0.18);
   
   --accent: #41464a;
-  --danger: #f44034;
   --user-answer: #094274;
+  --wrong-user-answer: #f44034;
 }
 
 :root[data-theme="dark"] {
@@ -35,6 +35,6 @@
   --highlight: rgba(137, 197, 250, 0.18);
   
   --accent: #b5c3cf;
-  --danger: #CB180B;
   --user-answer: #88C3F6;
+  --wrong-user-answer: #CB180B;
 }

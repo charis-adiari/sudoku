@@ -26,32 +26,29 @@ export class Board {
   }
 
   /**
+   * Saves a reference to the currently selected cell and adds highlights
+   * @param {number} row - Row index of current cell
+   * @param {number} col - Column index of current cell
+   */
+  setSelectedCell(row, col) {
+    this.selectedCell = this.cells[row][col];
+    this.#highlightCells();
+  }
+
+  /**
    * Sets the value of a cell
    * @param {number} newValue 
    */
   setCellValue(newValue) {    
     this.selectedCell.setValue(newValue);
   }
-  
-  /**
-   * Adds and remove highlights as needed for the cell currently selected (this.selectedCell)
-   */
-  selectCell() {
-    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
 
-    this.selectedCell.htmlElement.classList.add('selected-highlight');
-
-    this.#addHighlights(
-      this.selectedCell.row, 
-      this.selectedCell.column, 
-      ['same-value-highlight'], 
-      ['secondary-highlight']
-    );
+  #clearBoard() {
+    this.cells = [];
+    $('#sudoku-board').empty();
   }
 
   #handleClick(event) {
-    if (!$('.error').hasClass('hidden')) $('.error').addClass('hidden');
-
     const htmlElement = event.target.closest('.cell');
 
     if (!htmlElement) {
@@ -61,33 +58,31 @@ export class Board {
 
     const row = parseInt(htmlElement.dataset.xCoordinate);
     const col = parseInt(htmlElement.dataset.yCoordinate);
-    this.selectedCell = this.cells[row][col];
-    this.selectCell();
+    this.setSelectedCell(row, col);
   }
-
+  
   /**
-   * Applies CSS classes to all cells in the same row, column and block and cells with the same value 
-   * except the selected cell
-   * @param {number} selectedRow - Index of selected cell row
-   * @param {number} selectedCol - Index of selected cell column
-   * @param {string[]} sameValueClasses - Classes to be applied on cells with the same value as the selected cell
-   * @param {string[]} sameValueClasses - Classes to be applied on cells in the same block, row, or column
+   * Applies CSS classes to the selected cell, all cells in the same row, column and block, and cells with the same value 
    */
-  #addHighlights(selectedRow, selectedCol, sameValueClasses, secondaryClasses) {
-    const selectedCellValue = this.cells[selectedRow][selectedCol].value;
+  #highlightCells() {
+    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
+
+    this.selectedCell.htmlElement.classList.add('selected-highlight');
     
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         const currentCell = this.cells[row][col];
 
-        if (row === selectedRow && col === selectedCol) continue;
+        if (row === this.selectedCell.row && col === this.selectedCell.column) continue;
 
-        if (selectedCellValue !== 0 && selectedCellValue === currentCell.value)
-          currentCell.htmlElement.classList.add(...sameValueClasses);
-        else if (this.#inSameBlock(selectedRow, selectedCol, row, col))
-          currentCell.htmlElement.classList.add(...secondaryClasses);
-        else if (row === selectedRow) currentCell.htmlElement.classList.add(...secondaryClasses);
-        else if (col === selectedCol) currentCell.htmlElement.classList.add(...secondaryClasses);
+        if (this.selectedCell.value !== 0 && this.selectedCell.value === currentCell.value)
+          currentCell.htmlElement.classList.add(['same-value-highlight']);
+        else if (this.#inSameBlock(this.selectedCell.row, this.selectedCell.column, row, col))
+          currentCell.htmlElement.classList.add(['secondary-highlight']);
+        else if (row === this.selectedCell.row) 
+          currentCell.htmlElement.classList.add(['secondary-highlight']);
+        else if (col === this.selectedCell.column) 
+          currentCell.htmlElement.classList.add(['secondary-highlight']);
       }
       
     }
@@ -108,10 +103,5 @@ export class Board {
     const block2Col = Math.floor(col2 / 3);
 
     return block1Row === block2Row && block1Col === block2Col;
-  }
-
-  #clearBoard() {
-    this.cells = [];
-    $('#sudoku-board').empty();
   }
 }
