@@ -60,7 +60,7 @@ export class Game {
 
   #initGameControls() {
     for (let i = 0; i < 9; i++) {
-      $(`#btn-${i}`).on('click', (e) => this.#handleNumberButtonClick(e));      
+      $(`#btn-${i+1}`).on('click', (e) => this.#handleNumberButtonClick(e));      
     }
   }
 
@@ -73,7 +73,10 @@ export class Game {
     const id = e.target.id;
     const newValue = parseInt(id.charAt(id.length - 1));
 
-    if (!this.board.selectedCell.isGiven) this.board.setCellValue(newValue);
+    if (!this.board.selectedCell.isGiven) {
+      this.board.setCellValue(newValue);
+      this.board.selectCell();
+    }
   }
 
   #toggleError(hasError = true) {

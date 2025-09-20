@@ -32,6 +32,22 @@ export class Board {
   setCellValue(newValue) {    
     this.selectedCell.setValue(newValue);
   }
+  
+  /**
+   * Adds and remove highlights as needed for the cell currently selected (this.selectedCell)
+   */
+  selectCell() {
+    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
+
+    this.selectedCell.htmlElement.classList.add('selected-highlight');
+
+    this.#addHighlights(
+      this.selectedCell.row, 
+      this.selectedCell.column, 
+      ['same-value-highlight'], 
+      ['secondary-highlight']
+    );
+  }
 
   #handleClick(event) {
     if (!$('.error').hasClass('hidden')) $('.error').addClass('hidden');
@@ -46,20 +62,7 @@ export class Board {
     const row = parseInt(htmlElement.dataset.xCoordinate);
     const col = parseInt(htmlElement.dataset.yCoordinate);
     this.selectedCell = this.cells[row][col];
-    this.#selectCell();
-  }
-
-  #selectCell() {
-    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
-
-    this.selectedCell.htmlElement.classList.add('selected-highlight');
-
-    this.#addHighlights(
-      this.selectedCell.row, 
-      this.selectedCell.column, 
-      ['same-value-highlight'], 
-      ['secondary-highlight']
-    );
+    this.selectCell();
   }
 
   /**
