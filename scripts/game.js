@@ -32,7 +32,7 @@ export class Game {
     
     this.isLoading = false;
     this.#toggleLoading();
-    // this.timer.restartTimer();
+    this.timer.restartTimer();
   }
 
   stopGame() {
