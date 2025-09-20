@@ -18,6 +18,7 @@ export class Game {
     this.solutionArray = [];
 
     this.#toggleLoading();
+    this.#initGameControls();
   }
 
   startNewGame(level = 'easy') {
@@ -55,5 +56,23 @@ export class Game {
   #toggleLoading() {
     if (this.isLoading) $('#loading').removeClass('hidden');
     else $('#loading').addClass('hidden');
+  }
+
+  #initGameControls() {
+    for (let i = 0; i < 9; i++) {
+      $(`#btn-${i}`).on('click', (e) => this.#handleNumberButtonClick(e));      
+    }
+  }
+
+  #handleNumberButtonClick(e) {
+    if (!this.board.selectedCell) {
+      $('.error').removeClass('hidden');
+      return;
+    }
+
+    const id = e.target.id;
+    const newValue = parseInt(id.charAt(id.length - 1));
+
+    if (!this.board.selectedCell.isGiven) this.board.setCellValue(newValue);
   }
 }

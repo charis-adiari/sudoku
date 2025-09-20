@@ -4,6 +4,7 @@ export class Board {
   constructor(boardWidth) {
     this.length = boardWidth;
     this.cells = [];
+    this.selectedCell = null;
 
     $('#sudoku-board').on('click', (e) => this.#handleClick(e));
   }
@@ -24,7 +25,17 @@ export class Board {
     );
   }
 
+  /**
+   * Sets the value of a cell
+   * @param {number} newValue 
+   */
+  setCellValue(newValue) {    
+    this.selectedCell.setValue(newValue);
+  }
+
   #handleClick(event) {
+    if (!$('.error').hasClass('hidden')) $('.error').addClass('hidden');
+
     const htmlElement = event.target.closest('.cell');
 
     if (!htmlElement) {
@@ -34,15 +45,21 @@ export class Board {
 
     const row = parseInt(htmlElement.dataset.xCoordinate);
     const col = parseInt(htmlElement.dataset.yCoordinate);
-    this.#selectCell(this.cells[row][col]);
+    this.selectedCell = this.cells[row][col];
+    this.#selectCell();
   }
 
-  #selectCell(cell) {
+  #selectCell() {
     $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
 
-    cell.htmlElement.classList.add('selected-highlight');
+    this.selectedCell.htmlElement.classList.add('selected-highlight');
 
-    this.#addHighlights(cell.row, cell.column, ['same-value-highlight'], ['secondary-highlight']);
+    this.#addHighlights(
+      this.selectedCell.row, 
+      this.selectedCell.column, 
+      ['same-value-highlight'], 
+      ['secondary-highlight']
+    );
   }
 
   /**

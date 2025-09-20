@@ -52,18 +52,18 @@
   background-color: var(--btn-text);
 }
 
+.error {
+  background-color: var(--danger);
+  border-radius: 5px;
+  padding: 0.25em 0.5em;
+  font-size: 90%;
+}
+
 .generic-controls-container {
   margin: 0.5em 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  .error {
-    background-color: var(--danger);
-    border-radius: 5px;
-    padding: 0.25em 0.5em;
-    font-size: 90%;
-  }
 }
 
 .number-buttons-container {

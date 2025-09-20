@@ -12,7 +12,13 @@ export class Cell {
     this.htmlElement.setAttribute('data-x-coordinate', this.row);
     this.htmlElement.setAttribute('data-y-coordinate', this.column);
     this.htmlElement.classList.add('cell');
-    this.htmlElement.textContent = this.value === '0' || this.value === 0 ? '' : this.value;
+
+    if (this.hasNullValue()) this.isGiven = false;
+    else {
+      this.isGiven = true;
+      this.htmlElement.classList.add('is-given')
+      this.htmlElement.textContent = this.value;
+    }
 
     if (hasRightBorder) this.htmlElement.classList.add('right-border');
     if (hasBottomBorder) this.htmlElement.classList.add('bottom-border');
@@ -24,8 +30,20 @@ export class Cell {
     return this.htmlElement;
   }
 
+  /**
+   * Sets the value of a cell and updates the display
+   * @param {number} value 
+   */
   setValue(value) {
     this.value = value;
-    this.htmlElement.textContent = value;
+    this.htmlElement.textContent = value === 0 ? '' : value;
+  }
+
+  /**
+   * Determines whether or not cell value is null (represented as a 0)
+   * @returns {boolean}
+   */
+  hasNullValue() {
+    return this.value === '0' || this.value === 0;
   }
 }

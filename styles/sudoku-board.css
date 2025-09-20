@@ -20,6 +20,13 @@
       font-size: 1.5rem;
       text-align: center;
       align-content: center;
+      color: var(--secondary);
+      /* font-weight: 500; */
+    }
+
+    .cell.is-given {
+      color: var(--text);
+      font-weight: normal;
     }
 
     .cell.right-border {
@@ -35,6 +42,12 @@
     .cell.secondary-highlight { background-color: var(--primary-200); }
     
     .cell.same-value-highlight { background-color: var(--primary-300-85); }
+
+    /* .cell.selected-highlight,
+    .cell.same-value-highlight,
+    .cell.secondary-highlight {
+      color: var(--text);
+    } */
   }
 }
 
