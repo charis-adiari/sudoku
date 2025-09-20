@@ -38,18 +38,18 @@
 
 .btn-control.active {
   --btn-text: var(--accent);
-}
-
-.btn-control.active::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  width: 5px;
-  height: 5px;
-  background-color: var(--btn-text);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    background-color: var(--btn-text);
+  }
 }
 
 .error {

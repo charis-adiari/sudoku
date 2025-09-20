@@ -35,13 +35,13 @@ select { color: var(--text); }
   background-color: var(--btn-bg);
   color: var(--btn-text);
   border: 1px solid var(--btn-bg);
-}
-
-.btn:hover,
-.btn:focus,
-.btn:active {
-  color: var(--btn-bg);
-  background-color: var(--btn-text);
+  
+  &:active,
+  &:focus,
+  &:hover {
+    color: var(--btn-bg);
+    background-color: var(--background);
+  }
 }
 
 .btn-icon {
@@ -74,6 +74,13 @@ select { color: var(--text); }
   .dropdown-button {
     --btn-bg: var(--background);
     --btn-text: var(--primary);
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: var(--btn-bg);
+      background-color: var(--btn-text);
+    }
   }
 
   .dropdown-content {
