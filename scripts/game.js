@@ -66,7 +66,7 @@ export class Game {
 
   #handleNumberButtonClick(e) {
     if (!this.board.selectedCell) {
-      $('.error').removeClass('hidden');
+      this.#toggleError();
       return;
     }
 
@@ -74,5 +74,12 @@ export class Game {
     const newValue = parseInt(id.charAt(id.length - 1));
 
     if (!this.board.selectedCell.isGiven) this.board.setCellValue(newValue);
+  }
+
+  #toggleError(hasError = true) {
+    if (hasError)
+      $('.error').removeClass('hidden');
+    else
+      $('.error').addClass('hidden');
   }
 }

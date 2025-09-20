@@ -28,6 +28,11 @@
 .btn-arrow {
   border: 1px solid var(--btn-text);
   --btn-text: var(--accent);
+  
+  &:hover {
+    color: var(--btn-bg);
+    background-color: var(--btn-text);
+  }
 }
 
 .btn-control {
