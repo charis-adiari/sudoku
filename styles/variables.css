@@ -1,38 +1,40 @@
 :root {
-  --danger: #f44336;
+  --grey: #9ba2a8;
 }
 
 :root[data-theme="light"] {
-  --text: #211622;
-  --background: #f4f6f4;
-
-  --primary: #6a4c94;
-  --primary-200: #e4ddee;
-  --primary-300-85: rgba(174, 154, 203, 0.85);
-  --primary-500: #7957a8;
+  --text: #0c0c09;
+  --text-30: rgba(12, 12, 9, 0.3);
+  --background: #f7f7f4;
+  --btn-text: var(--text);
   
-  --secondary: #7b85a3;
-  --secondary-600: #545d78;
-  --secondary-700: #3f465a;
-  --secondary-700-30: rgb(63, 70, 90, 0.3);
+  --primary: #E7E718;
+  --selected-highlight: rgba(41, 94, 141, 0.85);
+  --user-answer-selected-text: #c7e7f3;
+  --selected-text: var(--text);
+  --same-value-highlight: rgba(41, 94, 141, 0.5);
+  --highlight: rgba(51, 122, 184, 0.18);
   
-  --accent: #aa4157;
+  --accent: #41464a;
+  --danger: #f44336;
+  --user-answer: #094274;
 }
 
 :root[data-theme="dark"] {
-  --text: #e7dee8;
-  --background: #090b09;
+  --text: #d3d3c4;
+  --text-30: rgba(235, 235, 220, 0.3);
+  --background: #192125;
+  --btn-text: var(--background);
 
-  --primary: #896bb3;
-  --primary-200: #302343;
-  /* this is primary-400, so it has more contrast with primary-200 on screens with the brightness turned down*/
-  --primary-300-85: rgba(97, 69, 135, 0.85);
-  --primary-500: #7957a8;
+  --primary: #E7E718;
 
-  --secondary: #5c6684;
-  --secondary-600: #8790ab;
-  --secondary-700: #a5acc0;
-  --secondary-700-30: rgba(165, 172, 192, 0.3);
+  --selected-highlight: rgba(137, 197, 250, 0.85);
+  --user-answer-selected-text: #094274;
+  --selected-text: var(--background);
+  --same-value-highlight: rgba(137, 197, 250, 0.5);
+  --highlight: rgba(137, 197, 250, 0.18);
   
-  --accent: #be556c;
+  --accent: #b5c3cf;
+  --danger: #CB180B;
+  --user-answer: #88C3F6;
 }

@@ -18,7 +18,7 @@
 .btn-control:hover,
 .btn-control:active,
 .btn-control:focus {
-  --btn-text: var(--secondary-600);
+  --btn-text: var(--accent);
   --btn-bg: var(--background);
 
   color: var(--btn-text);
@@ -27,7 +27,7 @@
 
 .btn-arrow {
   border: 1px solid var(--btn-text);
-  --btn-text: var(--secondary-700);
+  --btn-text: var(--accent);
 }
 
 .btn-control {
@@ -37,7 +37,7 @@
 }
 
 .btn-control.active {
-  --btn-text: var(--primary);
+  --btn-text: var(--accent);
 }
 
 .btn-control.active::after {

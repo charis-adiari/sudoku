@@ -6,6 +6,8 @@ export class GameSettings {
 
     const savedSettings = this.#getSettingsFromLocalStorage();
     
+    //TODO: If no night mode in saved settings, set night mode according to
+    // browser preferences
     if (savedSettings) {
       this.trainingWheels = savedSettings.trainingWheels;
       this.showMistakes = savedSettings.showMistakes;
