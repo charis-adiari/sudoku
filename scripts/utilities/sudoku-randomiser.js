@@ -23,9 +23,8 @@ export class SudokuRandomiser {
 
     const rotatedSudoku = this.#rotateSudoku(puzzleArray, solutionArray, rotations);
     this.#shuffleRowsInBands(rotatedSudoku.puzzle, rotatedSudoku.solution);
-    const finalSudoku = this.#swapNumbers(rotatedSudoku.puzzle, rotatedSudoku.solution)
-    console.log('Still swapping?')
-    console.table(finalSudoku.solution)
+    this.#shuffleColumnsInBands(rotatedSudoku.puzzle, rotatedSudoku.solution);
+    const finalSudoku = this.#swapNumbers(rotatedSudoku.puzzle, rotatedSudoku.solution);
 
     return {
       puzzle: finalSudoku.puzzle,
@@ -93,17 +92,43 @@ export class SudokuRandomiser {
   static #shuffleRowsInBands(puzzleArray, solutionArray) {
     for (let band = 0; band < 3; band++) {
       const start = band * 3;
-      
+
       const solutionRows = [0, 1, 2].map(i => solutionArray[start + i]);
       const puzzleRows = [0, 1, 2].map(i => puzzleArray[start + i]);
 
-      const indices = [0, 1, 2];
-      this.#fisherYatesShuffle(indices);
+      const indices = this.#fisherYatesShuffle([0, 1, 2]);
 
       indices.forEach((shuffledIndex, originalIndex) => {
         solutionArray[start + originalIndex] = solutionRows[shuffledIndex];
         puzzleArray[start + originalIndex] = puzzleRows[shuffledIndex];
       });
+    }
+  }
+
+  static #shuffleColumnsInBands(puzzleArray, solutionArray) {
+    for (let band = 0; band < 3; band++) {
+      const start = band * 3;
+
+      const indices = this.#fisherYatesShuffle([0, 1, 2]);
+
+      for (let row = 0; row < 9; row++) {
+        const solutionCols = [
+          solutionArray[row][start],
+          solutionArray[row][start + 1],
+          solutionArray[row][start + 2]
+        ]
+
+        const puzzleCols = [
+          puzzleArray[row][start],
+          puzzleArray[row][start + 1],
+          puzzleArray[row][start + 2]
+        ]
+
+        indices.forEach((newIndex, i) => {
+          solutionArray[row][start + i] = solutionCols[newIndex];
+          puzzleArray[row][start + i] = puzzleCols[newIndex];
+        });
+      }
     }
   }
 
