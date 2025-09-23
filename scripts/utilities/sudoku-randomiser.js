@@ -22,7 +22,10 @@ export class SudokuRandomiser {
     const rotations = rotationWeights[Math.floor(Math.random() * rotationWeights.length)];
 
     const rotatedSudoku = this.#rotateSudoku(puzzleArray, solutionArray, rotations);
+    this.#shuffleRowsInBands(rotatedSudoku.puzzle, rotatedSudoku.solution);
     const finalSudoku = this.#swapNumbers(rotatedSudoku.puzzle, rotatedSudoku.solution)
+    console.log('Still swapping?')
+    console.table(finalSudoku.solution)
 
     return {
       puzzle: finalSudoku.puzzle,
@@ -68,12 +71,12 @@ export class SudokuRandomiser {
   static #swapNumbers(puzzleArray, solutionArray) {
     //create array of numbers 1-9 in random order
     const numbers = this.#fisherYatesShuffle(Array.from({ length: 9 }, (_, i) => i + 1));
-    
+
     //create "lookup table" storing original number and number it should be mapped to
     const conversion = {};
     numbers.forEach((element, index) => conversion[index + 1] = element);
 
-    const shuffledPuzzle = puzzleArray.map(row => 
+    const shuffledPuzzle = puzzleArray.map(row =>
       row.map(cell => cell === 0 ? 0 : conversion[cell])
     );
 
@@ -87,8 +90,21 @@ export class SudokuRandomiser {
     }
   }
 
-  static #shuffleRowsInBands() {
-    
+  static #shuffleRowsInBands(puzzleArray, solutionArray) {
+    for (let band = 0; band < 3; band++) {
+      const start = band * 3;
+      
+      const solutionRows = [0, 1, 2].map(i => solutionArray[start + i]);
+      const puzzleRows = [0, 1, 2].map(i => puzzleArray[start + i]);
+
+      const indices = [0, 1, 2];
+      this.#fisherYatesShuffle(indices);
+
+      indices.forEach((shuffledIndex, originalIndex) => {
+        solutionArray[start + originalIndex] = solutionRows[shuffledIndex];
+        puzzleArray[start + originalIndex] = puzzleRows[shuffledIndex];
+      });
+    }
   }
 
   static #fisherYatesShuffle(array) {
@@ -96,7 +112,7 @@ export class SudokuRandomiser {
       const swapIndex = Math.floor(Math.random() * (i + 1));
       [array[i], array[swapIndex]] = [array[swapIndex], array[i]];
     }
-    
+
     return array;
   }
 
