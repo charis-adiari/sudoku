@@ -65,6 +65,7 @@ export class Game {
     }
 
     $('#erase').on('click', () => this.#eraseCellValue());
+    $('.btn-arrow').on('click', (e) => this.#handleArrowClick(e));
   }
 
   #handleNumberButtonClick(e) {
@@ -78,8 +79,6 @@ export class Game {
 
       this.#updateValueCounts(oldValue, newValue);
       this.board.setCellValue(newValue);
-
-      console.table(this.valueCounts)
     }
   }
 
@@ -91,8 +90,6 @@ export class Game {
 
       this.#updateValueCounts(oldValue);
       this.board.eraseCell();
-
-      console.table(this.valueCounts)
     }
   }
 
@@ -115,6 +112,33 @@ export class Game {
     } else {
       $(`#btn-${number}`).removeClass('check').addClass('btn btn-number');
       $(`#btn-${number}`).html(number);
+    }
+  }
+
+  #handleArrowClick(event) {
+    if (!this.board.selectedCell) return;
+
+    const arrowButton = event.target.closest('button');
+    const direction = arrowButton.id.substring(6);
+    const currentRow = this.board.selectedCell.row;
+    const currentCol = this.board.selectedCell.column;
+
+    switch (direction) {
+      case 'up':
+        if (currentRow > 0) this.board.setSelectedCell(currentRow - 1, currentCol);
+        break;
+
+      case 'down':
+        if (currentRow < 8) this.board.setSelectedCell(currentRow + 1, currentCol);
+        break;
+
+      case 'left':
+        if (currentCol > 0) this.board.setSelectedCell(currentRow, currentCol - 1);
+        break;
+
+      case 'right':
+        if (currentCol < 8) this.board.setSelectedCell(currentRow, currentCol + 1);
+        break;
     }
   }
 }
