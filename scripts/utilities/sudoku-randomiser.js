@@ -25,6 +25,7 @@ export class SudokuRandomiser {
     this.#shuffleRowsInBands(rotatedSudoku.puzzle, rotatedSudoku.solution);
     this.#shuffleColumnsInBands(rotatedSudoku.puzzle, rotatedSudoku.solution);
     this.#shuffleRowBands(rotatedSudoku.puzzle, rotatedSudoku.solution);
+    this.#shuffleColumnBands(rotatedSudoku.puzzle, rotatedSudoku.solution);
     
     const finalSudoku = this.#swapNumbers(rotatedSudoku.puzzle, rotatedSudoku.solution);
 
@@ -154,6 +155,32 @@ export class SudokuRandomiser {
     
     shuffledSolutionBands.flat().forEach((row, i) => solutionArray[i] = row);
     shuffledPuzzleBands.flat().forEach((row, i) => puzzleArray[i] = row);
+  }
+
+  static #shuffleColumnBands(puzzleArray, solutionArray) {
+    const indices = this.#fisherYatesShuffle([0, 1, 2]);
+
+    solutionArray.forEach(row => {
+      const bands = [
+        row.slice(0, 3),
+        row.slice(3, 6),
+        row.slice(6, 9)
+      ];
+
+      const newRow = indices.flatMap(i => bands[i]);
+      newRow.forEach((val, colIndex) => row[colIndex] = val);
+    });
+
+    puzzleArray.forEach(row => {
+      const bands = [
+        row.slice(0, 3),
+        row.slice(3, 6),
+        row.slice(6, 9)
+      ];
+
+      const newRow = indices.flatMap(i => bands[i]);
+      newRow.forEach((val, colIndex) => row[colIndex] = val);
+    });
   }
 
   static #fisherYatesShuffle(array) {
