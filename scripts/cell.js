@@ -36,7 +36,16 @@ export class Cell {
    */
   setValue(value) {
     this.value = value;
-    this.htmlElement.textContent = value === 0 ? '' : value;
+    this.updateDisplay();
+  }
+
+  /**
+   * Clears cell value and all notes
+   */
+  erase() {
+    this.value = 0;
+    this.notes = [];
+    this.updateDisplay();
   }
 
   /**
@@ -45,5 +54,14 @@ export class Cell {
    */
   hasNullValue() {
     return this.value === '0' || this.value === 0;
+  }
+
+  /**
+   * Updates HTML element of cell
+   */
+  updateDisplay() {
+    this.htmlElement.textContent = this.value === 0 ? '' : this.value;
+    
+    //TODO: set notes
   }
 }

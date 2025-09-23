@@ -36,11 +36,20 @@ export class Board {
   }
 
   /**
-   * Sets the value of a cell
+   * Sets the value of currently selected cell
    * @param {number} newValue 
    */
   setCellValue(newValue) {    
     this.selectedCell.setValue(newValue);
+    this.setSelectedCell(this.selectedCell.row, this.selectedCell.column);
+  }
+  
+  /**
+   * Erases value of currently selected cell
+   */
+  eraseCell() {
+    this.selectedCell.erase();
+    this.setSelectedCell(this.selectedCell.row, this.selectedCell.column);
   }
 
   #clearBoard() {

@@ -62,6 +62,8 @@ export class Game {
     for (let i = 0; i < 9; i++) {
       $(`#btn-${i+1}`).on('click', (e) => this.#handleNumberButtonClick(e));      
     }
+
+    $('#erase').on('click', () => this.#eraseCellValue());
   }
 
   #handleNumberButtonClick(e) {
@@ -70,9 +72,12 @@ export class Game {
     const id = e.target.id;
     const newValue = parseInt(id.charAt(id.length - 1));
 
-    if (!this.board.selectedCell.isGiven) {
-      this.board.setCellValue(newValue);
-      this.board.setSelectedCell(this.board.selectedCell.row, this.board.selectedCell.column);
-    }
+    if (!this.board.selectedCell.isGiven) this.board.setCellValue(newValue);
+  }
+
+  #eraseCellValue() {
+    if (!this.board.selectedCell) return;
+
+    if (!this.board.selectedCell.isGiven) this.board.eraseCell();
   }
 }
