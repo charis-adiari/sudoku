@@ -37,7 +37,6 @@ select { color: var(--text); }
   border: 1px solid var(--btn-bg);
   
   &:active,
-  &:focus,
   &:hover {
     color: var(--btn-bg);
     background-color: var(--background);

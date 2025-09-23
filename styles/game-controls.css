@@ -16,8 +16,7 @@
 .btn-arrow:active,
 .btn-control,
 .btn-control:hover,
-.btn-control:active,
-.btn-control:focus {
+.btn-control:active {
   --btn-text: var(--accent);
   --btn-bg: var(--background);
 
