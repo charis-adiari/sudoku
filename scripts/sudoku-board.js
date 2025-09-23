@@ -5,6 +5,7 @@ export class Board {
     this.length = boardWidth;
     this.cells = [];
     this.selectedCell = null;
+    this.isValid = true;
 
     $('#sudoku-board').on('click', (e) => this.#handleClick(e));
   }
@@ -12,17 +13,25 @@ export class Board {
   /**
    * Creates cells from array
    * @param {number[][]} sudokuArray - Sudoku board as a 2D array. 0 should be used in place of nulls
+   * @returns {number[]} An array with the total number of times a number appears on the board
    */
   createCellsFromArray(sudokuArray) {
     this.#clearBoard();
+    const valueCounts = new Array(9).fill(0);
 
     this.cells = Array.from({ length: 9 }, (_, i) =>
       Array.from({ length: 9 }, (_, j) => {
-        const cell = new Cell(i, j, sudokuArray[i][j]);
+        const value = sudokuArray[i][j];
+
+        if (value > 0) ++valueCounts[value - 1];
+        
+        const cell = new Cell(i, j, value);
         cell.createHtmlElement(j === 2 || j === 5, i === 2 || i === 5);
         return cell;
       })
     );
+
+    return valueCounts;
   }
 
   /**

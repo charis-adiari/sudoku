@@ -13,6 +13,7 @@ export class Game {
 
     this.level = 'easy';
     this.mistakeCount = 0;
+    this.valueCounts = new Array(9).fill(0);
 
     this.puzzleArray = [];
     this.solutionArray = [];
@@ -29,7 +30,7 @@ export class Game {
     this.level = level;
 
     this.#setPuzzle();
-    
+
     this.isLoading = false;
     this.#toggleLoading();
     this.timer.restartTimer();
@@ -41,16 +42,16 @@ export class Game {
 
   #setPuzzle() {
     let seed;
-    
+
     if (this.level === 'easy') seed = easySeed[Math.floor(Math.random() * easySeed.length)];
     else if (this.level === 'medium') seed = mediumSeed[Math.floor(Math.random() * mediumSeed.length)];
     else seed = hardSeed[Math.floor(Math.random() * hardSeed.length)];
-    
+
     const transformedSudoku = SudokuRandomiser.randomiseSudoku(seed.puzzle, seed.solution);
     this.puzzleArray = transformedSudoku.puzzle;
     this.solutionArray = transformedSudoku.solution;
-    
-    this.board.createCellsFromArray(this.puzzleArray);
+
+    this.valueCounts = this.board.createCellsFromArray(this.puzzleArray);
   }
 
   #toggleLoading() {
@@ -60,7 +61,7 @@ export class Game {
 
   #initGameControls() {
     for (let i = 0; i < 9; i++) {
-      $(`#btn-${i+1}`).on('click', (e) => this.#handleNumberButtonClick(e));      
+      $(`#btn-${i + 1}`).on('click', (e) => this.#handleNumberButtonClick(e));
     }
 
     $('#erase').on('click', () => this.#eraseCellValue());
@@ -72,12 +73,48 @@ export class Game {
     const id = e.target.id;
     const newValue = parseInt(id.charAt(id.length - 1));
 
-    if (!this.board.selectedCell.isGiven) this.board.setCellValue(newValue);
+    if (!this.board.selectedCell.isGiven) {
+      const oldValue = this.board.selectedCell.value;
+
+      this.#updateValueCounts(oldValue, newValue);
+      this.board.setCellValue(newValue);
+
+      console.table(this.valueCounts)
+    }
   }
 
   #eraseCellValue() {
     if (!this.board.selectedCell) return;
 
-    if (!this.board.selectedCell.isGiven) this.board.eraseCell();
+    if (!this.board.selectedCell.isGiven) {
+      const oldValue = this.board.selectedCell.value;
+
+      this.#updateValueCounts(oldValue);
+      this.board.eraseCell();
+
+      console.table(this.valueCounts)
+    }
+  }
+
+  #updateValueCounts(oldValue, newValue = 0) {
+    if (oldValue > 0) {
+      --this.valueCounts[oldValue - 1];
+      this.#updateNumberButtonState(oldValue);
+    }
+
+    if (newValue > 0) {
+      ++this.valueCounts[newValue - 1];
+      this.#updateNumberButtonState(newValue);
+    }
+  }
+
+  #updateNumberButtonState(number) {
+    if (this.board.isValid && this.valueCounts[number - 1] === 9) {
+      $(`#btn-${number}`).removeClass('btn btn-number').addClass('check');
+      $(`#btn-${number}`).html('<i class="bi bi-check-lg"></i>');
+    } else {
+      $(`#btn-${number}`).removeClass('check').addClass('btn btn-number');
+      $(`#btn-${number}`).html(number);
+    }
   }
 }

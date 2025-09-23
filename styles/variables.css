@@ -18,6 +18,8 @@
   --accent: #41464a;
   --user-answer: #094274;
   --wrong-user-answer: #f44034;
+
+  --green: #7bc03f;
 }
 
 :root[data-theme="dark"] {
@@ -37,4 +39,6 @@
   --accent: #b5c3cf;
   --user-answer: #88C3F6;
   --wrong-user-answer: #CB180B;
+
+  --green: #7bc13e;
 }
