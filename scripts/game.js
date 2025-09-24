@@ -18,25 +18,25 @@ export class Game {
     this.puzzleArray = [];
     this.solutionArray = [];
 
-    this.#toggleLoading();
+    this.#toggleLoadingDisplay();
     this.#initGameControls();
   }
 
   startNewGame(level = 'easy') {
     this.isLoading = true;
-    this.#toggleLoading();
-    this.stopGame();
+    this.#toggleLoadingDisplay();
+    this.#stopGame();
 
+    this.#resetGameControlsDisplay();
     this.level = level;
-
     this.#setPuzzle();
 
     this.isLoading = false;
-    this.#toggleLoading();
+    this.#toggleLoadingDisplay();
     this.timer.restartTimer();
   }
 
-  stopGame() {
+  #stopGame() {
     this.timer.stopTimer();
   }
 
@@ -51,10 +51,22 @@ export class Game {
     this.puzzleArray = transformedSudoku.puzzle;
     this.solutionArray = transformedSudoku.solution;
 
-    this.valueCounts = this.board.createCellsFromArray(this.puzzleArray);
+    const testSudoku = [
+      [3, 8, 6, 1, 7, 2, 9, 5, 4],
+      [4, 1, 9, 8, 5, 3, 6, 7, 2],
+      [5, 2, 7, 9, 4, 6, 8, 1, 3],
+      [7, 4, 1, 3, 6, 5, 2, 9, 8],
+      [6, 9, 5, 2, 1, 8, 4, 3, 7],
+      [2, 3, 8, 4, 9, 7, 5, 6, 1],
+      [1, 6, 3, 5, 2, 4, 7, 8, 9],
+      [8, 5, 2, 7, 3, 9, 1, 4, 6],
+      [9, 7, 4, 6, 8, 1, 0, 2, 0]
+    ];
+    this.valueCounts = this.board.createCellsFromArray(testSudoku);
+    // this.valueCounts = this.board.createCellsFromArray(this.puzzleArray);
   }
 
-  #toggleLoading() {
+  #toggleLoadingDisplay() {
     if (this.isLoading) $('#loading').removeClass('hidden');
     else $('#loading').addClass('hidden');
   }
@@ -107,9 +119,11 @@ export class Game {
 
   #updateNumberButtonState(number) {
     if (this.board.isValid && this.valueCounts[number - 1] === 9) {
+      $(`#btn-${number}`).prop("disabled", true);
       $(`#btn-${number}`).removeClass('btn btn-number').addClass('check');
       $(`#btn-${number}`).html('<i class="bi bi-check-lg"></i>');
     } else {
+      $(`#btn-${number}`).prop("disabled", false);
       $(`#btn-${number}`).removeClass('check').addClass('btn btn-number');
       $(`#btn-${number}`).html(number);
     }
@@ -139,6 +153,13 @@ export class Game {
       case 'right':
         if (currentCol < 8) this.board.setSelectedCell(currentRow, currentCol + 1);
         break;
+    }
+  }
+
+  #resetGameControlsDisplay() {
+    for (let i = 0; i < 9; i++) {
+      $(`#btn-${i + 1}`).removeClass('check').addClass('btn btn-number');
+      $(`#btn-${i + 1}`).html(i + 1);
     }
   }
 }
