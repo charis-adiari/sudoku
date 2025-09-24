@@ -50,20 +50,7 @@ export class Game {
     const transformedSudoku = SudokuRandomiser.randomiseSudoku(seed.puzzle, seed.solution);
     this.puzzleArray = transformedSudoku.puzzle;
     this.solutionArray = transformedSudoku.solution;
-
-    const testSudoku = [
-      [3, 8, 6, 1, 7, 2, 9, 5, 4],
-      [4, 1, 9, 8, 5, 3, 6, 7, 2],
-      [5, 2, 7, 9, 4, 6, 8, 1, 3],
-      [7, 4, 1, 3, 6, 5, 2, 9, 8],
-      [6, 9, 5, 2, 1, 8, 4, 3, 7],
-      [2, 3, 8, 4, 9, 7, 5, 6, 1],
-      [1, 6, 3, 5, 2, 4, 7, 8, 9],
-      [8, 5, 2, 7, 3, 9, 1, 4, 6],
-      [9, 7, 4, 6, 8, 1, 0, 2, 0]
-    ];
-    this.valueCounts = this.board.createCellsFromArray(testSudoku);
-    // this.valueCounts = this.board.createCellsFromArray(this.puzzleArray);
+    this.valueCounts = this.board.createCellsFromArray(this.puzzleArray);
   }
 
   #toggleLoadingDisplay() {
