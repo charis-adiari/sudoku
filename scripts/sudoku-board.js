@@ -61,6 +61,13 @@ export class Board {
     this.setSelectedCell(this.selectedCell.row, this.selectedCell.column);
   }
 
+  /**
+   * Removes all highlights from all cells
+   */
+  removeAllHighlights() {
+    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
+  }
+
   #clearBoard() {
     this.cells = [];
     $('#sudoku-board').empty();
@@ -83,8 +90,8 @@ export class Board {
    * Applies CSS classes to the selected cell, all cells in the same row, column and block, and cells with the same value 
    */
   #highlightCells() {
-    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
-
+    this.removeAllHighlights();
+    
     this.selectedCell.htmlElement.classList.add('selected-highlight');
     
     for (let row = 0; row < 9; row++) {

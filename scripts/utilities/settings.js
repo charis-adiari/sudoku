@@ -1,4 +1,7 @@
-export class GameSettings {
+/**
+ * Manages the settings for games
+ */
+export class Settings {
   constructor() {
     this.trainingWheels = false;
     this.showMistakes = false;
@@ -67,11 +70,11 @@ export class GameSettings {
     else if (setting === 'showMistakes') this.showMistakes = value;
     else this.nightMode = value;
 
-    localStorage.setItem('game-settings', JSON.stringify(this));
+    localStorage.setItem('settings', JSON.stringify(this));
   }
 
   #getSettingsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('game-settings'))
+    return JSON.parse(localStorage.getItem('settings'));
   }
 
   #initToggleDisplays() {

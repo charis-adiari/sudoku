@@ -1,19 +1,22 @@
-import { GameSettings } from "./utilities/game-settings.js";
+import { Settings } from "./utilities/settings.js";
 import { Board } from "./sudoku-board.js";
 import { easySeed, mediumSeed, hardSeed } from "../seed.js";
 import { Timer } from "./utilities/timer.js";
 import { SudokuRandomiser } from "./utilities/sudoku-randomiser.js";
+import { Stats } from "./utilities/stats.js";
+import { Level } from "./utilities/level-enum.js";
 
 export class Game {
   constructor() {
     this.isLoading = true;
-    this.settings = new GameSettings();
+    this.settings = new Settings();
     this.board = new Board($('#sudoku-board').width());
     this.timer = new Timer();
 
-    this.level = 'easy';
+    this.level = Level.EASY;
     this.mistakeCount = 0;
     this.valueCounts = new Array(9).fill(0);
+    this.stats = new Stats(this.level, this.timer.seconds, this.mistakeCount);
 
     this.puzzleArray = [];
     this.solutionArray = [];
@@ -22,13 +25,20 @@ export class Game {
     this.#initGameControls();
   }
 
-  startNewGame(level = 'easy') {
+  startNewGame(level) {
+    const levelEnum = Level.getLevelByName(level);
+
+    if (!levelEnum) {
+      console.error('No level selected. Can\'t start new game');
+      return;
+    }
+
     this.isLoading = true;
     this.#toggleLoadingDisplay();
     this.#stopGame();
 
-    this.#resetGameControlsDisplay();
-    this.level = level;
+    this.#resetGameDisplay();
+    this.level = levelEnum;
     this.#setPuzzle();
 
     this.isLoading = false;
@@ -43,8 +53,8 @@ export class Game {
   #setPuzzle() {
     let seed;
 
-    if (this.level === 'easy') seed = easySeed[Math.floor(Math.random() * easySeed.length)];
-    else if (this.level === 'medium') seed = mediumSeed[Math.floor(Math.random() * mediumSeed.length)];
+    if (this.level === Level.EASY) seed = easySeed[Math.floor(Math.random() * easySeed.length)];
+    else if (this.level === Level.MEDIUM) seed = mediumSeed[Math.floor(Math.random() * mediumSeed.length)];
     else seed = hardSeed[Math.floor(Math.random() * hardSeed.length)];
 
     const transformedSudoku = SudokuRandomiser.randomiseSudoku(seed.puzzle, seed.solution);
@@ -78,6 +88,7 @@ export class Game {
 
       this.#updateValueCounts(oldValue, newValue);
       this.board.setCellValue(newValue);
+      this.#checkForWin();
     }
   }
 
@@ -143,10 +154,33 @@ export class Game {
     }
   }
 
-  #resetGameControlsDisplay() {
+  #resetGameDisplay() {
     for (let i = 0; i < 9; i++) {
       $(`#btn-${i + 1}`).removeClass('check').addClass('btn btn-number');
       $(`#btn-${i + 1}`).html(i + 1);
+      $(`#btn-${i + 1}`).prop("disabled", false);
     }
+    
+    $('.game-controls-container').show();
+    $('#stats-container').hide();
+  }
+
+  #checkForWin() {
+    const isComplete = this.valueCounts.every(count => count === 9);
+
+    if (isComplete && this.board.isValid) {
+      this.#winGame();
+    }
+  }
+
+  #winGame() {
+    this.timer.stopTimer();
+    $('.game-controls-container').hide();
+    this.board.selectedCell = null;
+    this.board.removeAllHighlights();
+    this.stats.setCurrentStats(this.level, this.timer.seconds, this.mistakeCount);
+
+    this.stats.display();
+    $('#stats-container').show();
   }
 }

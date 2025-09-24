@@ -1,0 +1,19 @@
+@import url('variables.css');
+
+h4 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.25em;
+}
+
+#stats-container {
+  display: none;
+  margin-top: 1rem;
+}
+
+.stat {
+  font-weight: 500;
+  margin-left: 0.25em;
+}
+
+.text-centre { text-align: center; }
