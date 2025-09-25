@@ -62,6 +62,9 @@ export class Board {
   setCellValue(newValue) {    
     this.selectedCell.setValue(newValue);
     this.setSelectedCell(this.selectedCell.row, this.selectedCell.column);
+    this.#checkRow(newValue);
+    this.#checkColumn(newValue);
+    this.#checkBox(newValue);
   }
   
   /**
@@ -81,11 +84,11 @@ export class Board {
 
   /**
    * If the cell doesn't contain a note with that number, the note is added. Otherwise, the note is removed
-   * @param {number} number - The number that should be in the note (1 - 9)
+   * @param {number} noteValue - The number that should be in the note (1 - 9)
    */
-  toggleNote(number) {
-    if (this.selectedCell.notes.includes(number)) this.selectedCell.removeNote(number);
-    else this.selectedCell.addNote(number);
+  toggleNote(noteValue) {
+    if (this.selectedCell.notes.includes(noteValue)) this.selectedCell.removeNote(noteValue);
+    else this.selectedCell.addNote(noteValue);
   }
 
   #clearBoard() {
@@ -148,5 +151,87 @@ export class Board {
     const box2Col = Math.floor(col2 / 3);
 
     return box1Row === box2Row && box1Col === box2Col;
+  }
+
+  #checkRow(newValue) {
+    for (let i = 0; i < 9; i++) {
+      const currentCell = this.cells[this.selectedCell.row][i];
+
+      if (currentCell.column === this.selectedCell.column) continue;
+      
+      if (currentCell.notes.includes(newValue)) currentCell.removeNote(newValue);
+      
+      /* if (currentCell.value === newValue) {
+        this.selectedCell.htmlElement.classList.add('invalid');
+        currentCell.htmlElement.classList.add('invalid-highlight');
+        this.#markCellInvalid(currentCell.row, currentCell.column);
+      } */
+    }
+  }
+
+  #checkColumn(newValue) {
+    for (let i = 0; i < 9; i++) {
+      const currentCell = this.cells[i][this.selectedCell.column];
+
+      if (currentCell.row === this.selectedCell.row) continue;
+      
+      if (currentCell.notes.includes(newValue)) currentCell.removeNote(newValue);
+      
+      /* if (currentCell.value === newValue) {
+        this.selectedCell.htmlElement.classList.add('invalid');
+        currentCell.htmlElement.classList.add('invalid-highlight');
+        this.#markCellInvalid(currentCell.row, currentCell.column);
+      } */
+    }
+  }
+
+  #checkBox(newValue) {
+    const boxBounds = this.#getBoxBounds(this.selectedCell.row, this.selectedCell.column);
+
+    for (let i = boxBounds.boxStartRow; i < boxBounds.boxEndRow; i++) {
+      for (let j = boxBounds.boxStartCol; j < boxBounds.boxEndCol; j++) {
+        const currentCell = this.cells[i][j];
+  
+        if (currentCell.row === this.selectedCell.row && currentCell.column === this.selectedCell.column)
+          continue;
+        
+        if (currentCell.notes.includes(newValue)) currentCell.removeNote(newValue);
+        
+        /* if (currentCell.value === newValue) {
+          this.selectedCell.htmlElement.classList.add('invalid');
+          currentCell.htmlElement.classList.add('invalid-highlight');
+          this.#markCellInvalid(currentCell.row, currentCell.column);
+        } */
+      }
+    }
+  }
+
+  /**
+   * Calculate the starting row and column of a block given a cell's position
+   * @param {number} row - 0-based row index of the cell
+   * @param {number} col - 0-based column index of the cell
+   * @returns {{boxStartRow: number, boxStartCol: number, boxEndRow: number, boxEndCol: number}} An object containing the start and end row and column. Start indices are inclusive. End indices are exclusive
+   * 
+   * @example
+   * // Cell at position (5,4) is in a block starting at (3,3)
+   * const boxBounds = getBoxBounds(5, 4);
+   * console.log(boxBounds); // { boxStartRow: 3, boxStartCol: 3, boxEndRow: 6, boxEndCol: 6 }
+   */
+  #getBoxBounds(row, col) {
+    const boxSize = 3;
+    const boxStartRow = Math.floor(row / boxSize) * boxSize;
+    const boxStartCol = Math.floor(col / boxSize) * boxSize;
+
+    return { 
+      boxStartRow: boxStartRow,
+      boxStartCol: boxStartCol,
+      boxEndRow: boxStartRow + 3,
+      boxEndCol: boxStartCol + 3
+    };
+  }
+
+  #markCellInvalid(row, col) {
+    this.cells[row][col].isValid = false;
+    this.isValid = false;
   }
 }

@@ -37,6 +37,8 @@
 
   &.secondary-highlight { background-color: var(--highlight); }
 
+  &.invalid-highlight { background-color: var(--invalid-bg); }
+
   &.is-given.selected-highlight { color: var(--selected-text); }
   
   &.selected-highlight {
@@ -63,6 +65,8 @@
     .note.show { opacity: 1; }
   }
 }
+
+.invalid { color: var(--invalid-text) !important; }
 
 .loading-container,
 .play-button-container {

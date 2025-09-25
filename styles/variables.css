@@ -17,7 +17,8 @@
   
   --accent: #41464a;
   --user-answer: #094274;
-  --wrong-user-answer: #f44034;
+  --invalid-bg: #faa49e; /* 1 shade lighter */
+  --invalid-text: #f44034;
 
   --green: #7bc03f;
 }
@@ -38,7 +39,8 @@
   
   --accent: #b5c3cf;
   --user-answer: #88C3F6;
-  --wrong-user-answer: #CB180B;
+  --invalid-bg: #610b05; /* 1 shade lighter */
+  --invalid-text: #CB180B;
 
   --green: #7bc13e;
 }
