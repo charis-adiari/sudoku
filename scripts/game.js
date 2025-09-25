@@ -10,8 +10,9 @@ export class Game {
   constructor() {
     this.isLoading = true;
     this.settings = new Settings();
-    this.board = new Board($('#sudoku-board').width());
+    this.board = new Board();
     this.timer = new Timer();
+    this.isTakingNotes = false;
 
     this.level = Level.EASY;
     this.mistakeCount = 0;
@@ -75,20 +76,22 @@ export class Game {
 
     $('#erase').on('click', () => this.#eraseCellValue());
     $('.btn-arrow').on('click', (e) => this.#handleArrowClick(e));
+    $('#notes').on('click', () => this.#toggleTakingNotes());
   }
 
   #handleNumberButtonClick(e) {
     if (!this.board.selectedCell) return;
 
     const id = e.target.id;
-    const newValue = parseInt(id.charAt(id.length - 1));
+    const number = parseInt(id.charAt(id.length - 1));
 
     if (!this.board.selectedCell.isGiven) {
-      const oldValue = this.board.selectedCell.value;
-
-      this.#updateValueCounts(oldValue, newValue);
-      this.board.setCellValue(newValue);
-      this.#checkForWin();
+      if (this.isTakingNotes) this.board.toggleNote(number);
+      else {
+        this.#updateValueCounts(this.board.selectedCell.value, number);
+        this.board.setCellValue(number);
+        this.#checkForWin();
+      }
     }
   }
 
@@ -151,6 +154,19 @@ export class Game {
       case 'right':
         if (currentCol < 8) this.board.setSelectedCell(currentRow, currentCol + 1);
         break;
+    }
+  }
+
+  #toggleTakingNotes() {
+    this.isTakingNotes = !this.isTakingNotes;
+
+    if (this.isTakingNotes) {
+      $('#notes').addClass('active');
+      $('#notes>i').addClass('bi-pencil-fill').removeClass('bi-pencil');
+    }
+    else {
+      $('#notes').removeClass('active');
+      $('#notes>i').removeClass('bi-pencil-fill').addClass('bi-pencil');
     }
   }
 

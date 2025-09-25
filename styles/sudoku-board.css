@@ -12,41 +12,55 @@
     grid-template-rows: repeat(9, 1fr);
     aspect-ratio: 1;
     width: 100%;
+  }
+}
 
-    .cell {
-      border-right: 1px solid var(--text-30);
-      border-bottom: 1px solid var(--text-30);
-      display: inline-block;
-      font-size: 1.5rem;
-      text-align: center;
-      align-content: center;
-      color: var(--user-answer);
-      /* font-weight: 500; */
-    }
+.cell {
+  border-right: 1px solid var(--text-30);
+  border-bottom: 1px solid var(--text-30);
+  display: inline-block;
+  font-size: 1.5rem;
+  text-align: center;
+  align-content: center;
+  color: var(--user-answer);
 
-    .cell.is-given {
-      color: var(--text);
-      font-weight: normal;
-    }
+  &.is-given {
+    color: var(--text);
+    font-weight: normal;
+  }
 
-    .cell.right-border {
-      border-right: 2px solid var(--text);
-    }
+  &.right-border { border-right: 2px solid var(--text); }
 
-    .cell.bottom-border {
-      border-bottom: 2px solid var(--text);
-    }
+  &.bottom-border { border-bottom: 2px solid var(--text); }
 
-    .cell.same-value-highlight { background-color: var(--same-value-highlight); }
+  &.same-value-highlight { background-color: var(--same-value-highlight); }
 
-    .cell.secondary-highlight { background-color: var(--highlight); }
+  &.secondary-highlight { background-color: var(--highlight); }
 
-    .cell.is-given.selected-highlight { color: var(--selected-text); }
+  &.is-given.selected-highlight { color: var(--selected-text); }
+  
+  &.selected-highlight {
+    color: var(--user-answer-selected-text);
+    background-color: var(--selected-highlight);
+  }
+
+  &.selected-highlight {
+    .notes-container .note { color: var(--selected-text); }
+  }
+  
+  .notes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1px 2px;
     
-    .cell.selected-highlight {
-      color: var(--user-answer-selected-text);
-      background-color: var(--selected-highlight);
+    .note {
+      font-size: 0.5rem;
+      color: var(--accent);
+      opacity: 0;
     }
+
+    .note.show { opacity: 1; }
   }
 }
 

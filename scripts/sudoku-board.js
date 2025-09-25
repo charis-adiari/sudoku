@@ -1,10 +1,21 @@
 import { Cell } from "./cell.js";
 
 export class Board {
-  constructor(boardWidth) {
-    this.length = boardWidth;
+  constructor() {
+    /**
+     * 2D array of all the cells in the board
+     * @type {Cell[]}
+     */
     this.cells = [];
+    /**
+     * Represents the cell that is currently selected
+     * @type {Cell | null}
+     */
     this.selectedCell = null;
+    /**
+     * Stores whether or not all the cells on the board have valid values
+     * @type {boolean}
+     */
     this.isValid = true;
 
     $('#sudoku-board').on('click', (e) => this.#handleClick(e));
@@ -66,6 +77,15 @@ export class Board {
    */
   removeAllHighlights() {
     $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
+  }
+
+  /**
+   * If the cell doesn't contain a note with that number, the note is added. Otherwise, the note is removed
+   * @param {number} number - The number that should be in the note (1 - 9)
+   */
+  toggleNote(number) {
+    if (this.selectedCell.notes.includes(number)) this.selectedCell.removeNote(number);
+    else this.selectedCell.addNote(number);
   }
 
   #clearBoard() {
