@@ -107,7 +107,7 @@ export class Board {
   }
   
   /**
-   * Applies CSS classes to the selected cell, all cells in the same row, column and block, and cells with the same value 
+   * Applies CSS classes to the selected cell, all cells in the same row, column and box, and cells with the same value 
    */
   #highlightCells() {
     this.removeAllHighlights();
@@ -122,7 +122,7 @@ export class Board {
 
         if (this.selectedCell.value !== 0 && this.selectedCell.value === currentCell.value)
           currentCell.htmlElement.classList.add(['same-value-highlight']);
-        else if (this.#inSameBlock(this.selectedCell.row, this.selectedCell.column, row, col))
+        else if (this.#inSameBox(this.selectedCell.row, this.selectedCell.column, row, col))
           currentCell.htmlElement.classList.add(['secondary-highlight']);
         else if (row === this.selectedCell.row) 
           currentCell.htmlElement.classList.add(['secondary-highlight']);
@@ -134,19 +134,19 @@ export class Board {
   }
 
   /**
-   * Checks if 2 cells are in the same block
+   * Checks if 2 cells are in the same box
    * @param {number} row1 Row index of the first cell 
    * @param {number} col1 Column index of the first cell
    * @param {number} row2 Row index of the second cell
    * @param {number} col2 Column index of the second cell
-   * @returns {boolean} Whether or not the 2 cells are in the same block
+   * @returns {boolean} Whether or not the 2 cells are in the same box
    */
-  #inSameBlock(row1, col1, row2, col2) {
-    const block1Row = Math.floor(row1 / 3);
-    const block1Col = Math.floor(col1 / 3);
-    const block2Row = Math.floor(row2 / 3);
-    const block2Col = Math.floor(col2 / 3);
+  #inSameBox(row1, col1, row2, col2) {
+    const box1Row = Math.floor(row1 / 3);
+    const box1Col = Math.floor(col1 / 3);
+    const box2Row = Math.floor(row2 / 3);
+    const box2Col = Math.floor(col2 / 3);
 
-    return block1Row === block2Row && block1Col === block2Col;
+    return box1Row === box2Row && box1Col === box2Col;
   }
 }
