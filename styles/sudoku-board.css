@@ -91,11 +91,6 @@
   animation: rotation 1s linear infinite;
 }
 
-.play-button-container .btn-icon-large {
-  font-size: 5rem;
-  border-radius: 50%;
-}
-
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

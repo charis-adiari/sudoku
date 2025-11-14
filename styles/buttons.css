@@ -2,6 +2,7 @@
 
 .btn {
   all: unset;
+  cursor: pointer;
 
   &.btn-primary,
   &.btn-secondary {
@@ -27,5 +28,28 @@
     --btn-background-active: var(--background-tint-1);
     --btn-border-color: var(--white);
     border: 1px solid var(--btn-border-color);
+  }
+
+  &.btn-pause-play {
+    border-radius: 50%;
+    font-size: 1rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    padding: 0;
+    text-align: center;
+    align-items: center;
+
+    i {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &.btn-pause-play-large {
+    padding: 0.25em 0.5em;
+    aspect-ratio: 1 / 1;
+    font-size: 5rem;
+    border-radius: 50%;
   }
 }
