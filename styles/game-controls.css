@@ -12,38 +12,6 @@
   }
 }
 
-.btn-control,
-.btn-control:hover,
-.btn-control:active {
-  --btn-text: var(--accent);
-  --btn-bg: var(--background);
-
-  color: var(--btn-text);
-  background-color: var(--btn-bg);
-}
-
-.btn-control {
-  padding: 0;
-  font-size: 1.5rem;
-  position: relative;
-}
-
-.btn-control.active {
-  --btn-text: var(--accent);
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    width: 5px;
-    height: 5px;
-    background-color: var(--btn-text);
-  }
-}
-
 .generic-controls-container {
   margin: 0.5em 0;
   display: flex;

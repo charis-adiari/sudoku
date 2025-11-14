@@ -35,7 +35,7 @@
   }
 
   /* Used to pair icon buttons with btn-primary and btn-secondary */
-  &.icon {
+  &.btn-icon {
     height: 2rem;
     aspect-ratio: 1;
     padding: 0;
@@ -57,4 +57,33 @@
     font-size: 5rem;
     border-radius: 50%;
   }
+
+  &.btn-control {
+    padding: 0;
+    position: relative;
+
+    i {
+      height: 1.5rem;
+    }
+    
+    i::before {
+      font-size: 1.5rem;
+    }
+  }
+
+  &.btn-control.active {
+  color: var(--white);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    background-color: var(--white);
+  }
+}
 }
