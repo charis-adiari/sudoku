@@ -24,25 +24,6 @@ html {
 
 select { color: var(--text); }
 
-.btn {
-  all: unset;
-  padding: 0.25em 0.5em;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  cursor: pointer;
-
-  --btn-bg: var(--primary);
-  background-color: var(--btn-bg);
-  color: var(--btn-text);
-  border: 1px solid var(--btn-bg);
-  
-  &:active,
-  &:hover {
-    color: var(--btn-bg);
-    background-color: var(--background);
-  }
-}
-
 .btn-icon {
   border-radius: 50%;
   font-size: 1rem;
@@ -69,18 +50,6 @@ select { color: var(--text); }
 
 .dropdown {
   position: relative;
-
-  .dropdown-button {
-    --btn-bg: var(--background);
-    --btn-text: var(--primary);
-
-    &:active,
-    &:focus,
-    &:hover {
-      color: var(--btn-bg);
-      background-color: var(--btn-text);
-    }
-  }
 
   .dropdown-content {
     display: none;
