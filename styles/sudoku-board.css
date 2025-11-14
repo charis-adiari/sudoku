@@ -15,6 +15,8 @@
   }
 }
 
+/* The rule of placing classes in alphabetical order was intentionally broken in this section.
+Tamper with the ordering at your own risk */
 .cell {
   border-right: 1px solid var(--cell-border);
   border-bottom: 1px solid var(--cell-border);
@@ -24,12 +26,6 @@
   align-content: center;
   color: var(--user-answer-cell-text);
   background-color: inherit;
-
-  /* Prefilled text */
-  &.is-given {
-    color: var(--text);
-    font-weight: normal;
-  }
 
   &.right-border { border-right: 2px solid var(--text); }
 
