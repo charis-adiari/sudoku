@@ -2,6 +2,8 @@
 
 * {
   box-sizing: border-box;
+  user-select: inherit;
+  -webkit-user-select: inherit;
 }
 
 body {
