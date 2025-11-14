@@ -1,4 +1,27 @@
 :root {
+  --black: #0F1316;
+  --black-tint-1: #192125;
+  --black-tint-2: #1C293A;
+  --black-tint-3: #29343D;
+  
+  --white: #DADDD4;
+  --white-shade-grey: #B5B5A1;
+  
+  --brand: #E7E718;
+  --brand-shade: #B9B913;
+  
+  --blue: #96D0FE;
+  --blue-shade-1: #6CBEE6;
+  --blue-shade-2: #3C649F;
+  --blue-shade-2-saturated: #004DAF;
+
+  --red: #CB180B;
+  --red-shade: #B0180E;
+
+  --green: #7DBD41;
+  --green-shade: #649834;
+
+  /*not included*/
   --grey: #9ba2a8;
 }
 
@@ -24,23 +47,26 @@
 }
 
 :root[data-theme="dark"] {
-  --text: #d3d3c4;
-  --text-30: rgba(235, 235, 220, 0.3);
-  --background: #192125;
-  --btn-text: var(--background);
+  --background: var(--black);
+  --background-tint-1: var(--black-tint-3);
 
-  --primary: #E7E718;
+  --text: var(--white);
+  --text-grey-1: var(--white-shade-grey);
+  --text-on-selected-cell: var(--black-tint-1);
 
-  --selected-highlight: rgba(137, 197, 250, 0.85);
-  --user-answer-selected-text: #094274;
-  --selected-text: var(--background);
-  --same-value-highlight: rgba(137, 197, 250, 0.5);
-  --highlight: rgba(137, 197, 250, 0.18);
-  
-  --accent: #b5c3cf;
-  --user-answer: #88C3F6;
-  --invalid-bg: #610b05; /* 1 shade lighter */
-  --invalid-text: #CB180B;
+  --primary: var(--brand);
+  --primary-shade-1: var(--brand-shade);
 
-  --green: #7bc13e;
+  --selected-cell-bg: var(--blue-shade-1);
+  --same-value-cell-bg: var(--blue-shade-2);
+  --highlighted-cell-bg: var(--black-tint-2);
+
+  --user-answer: var(--blue);
+  --user-answer-on-select-cell: var(--blue-shade-2-saturated);
+
+  --danger: var(--red);
+  --danger-shade-1: var(--red-shade);
+
+  --success: var(--green);
+  --success-shade-1: var(--green-shade);
 }
