@@ -34,7 +34,7 @@
     border: 1px solid var(--btn-border-color);
   }
 
-  /* Used t0 pair icon buttons with btn-primary and btn-secondary */
+  /* Used to pair icon buttons with btn-primary and btn-secondary */
   &.icon {
     height: 2rem;
     aspect-ratio: 1;
