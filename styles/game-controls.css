@@ -78,6 +78,7 @@
 
 .check {
   all: unset;
+  box-sizing: border-box;
   background-color: var(--background);
   color: var(--green);
   font-size: 1.5rem;

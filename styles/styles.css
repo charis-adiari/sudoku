@@ -24,22 +24,6 @@ html {
 
 select { color: var(--text); }
 
-.btn-icon {
-  border-radius: 50%;
-  font-size: 1rem;
-  width: 1.7rem;
-  height: 1.7rem;
-  padding: 0;
-  text-align: center;
-  align-items: center;
-
-  i {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-  }
-}
-
 .disabled {
   opacity: 0.6;
   
@@ -50,6 +34,11 @@ select { color: var(--text); }
 
 .dropdown {
   position: relative;
+  display: flex;
+
+  .btn {
+    align-self: center;
+  }
 
   .dropdown-content {
     display: none;
