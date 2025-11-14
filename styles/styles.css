@@ -2,8 +2,8 @@
 
 * {
   box-sizing: border-box;
-  user-select: inherit;
-  -webkit-user-select: inherit;
+  user-select: none !important;
+  -webkit-user-select: none !important;
 }
 
 body {
@@ -101,12 +101,6 @@ select { color: var(--text); }
 }
 
 .grey-text { color: var(--text-grey-2); }
-
-.prevent-select {
-  user-select: none !important;
-  -webkit-user-select: none !important;
-}
-
 
 /* TOGGLE BUTTON */
 .checkbox:checked + .slider {
