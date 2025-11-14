@@ -28,9 +28,8 @@
 
 .number-buttons-container {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  column-gap: 0.1em;
-  aspect-ratio: 9 / 1;
+  grid-template-columns: repeat(auto-fit, minmax(32px, 1fr));
+  gap: 0.1em;
   width: 100%;
   margin-top: 0.75em;
 }
