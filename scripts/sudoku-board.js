@@ -79,7 +79,7 @@ export class Board {
    * Removes all highlights from all cells
    */
   removeAllHighlights() {
-    $('.cell').removeClass('selected-highlight secondary-highlight same-value-highlight');
+    $('.cell').removeClass('selected same-value related');
   }
 
   /**
@@ -115,7 +115,7 @@ export class Board {
   #highlightCells() {
     this.removeAllHighlights();
     
-    this.selectedCell.htmlElement.classList.add('selected-highlight');
+    this.selectedCell.htmlElement.classList.add('selected');
     
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
@@ -124,13 +124,13 @@ export class Board {
         if (row === this.selectedCell.row && col === this.selectedCell.column) continue;
 
         if (this.selectedCell.value !== 0 && this.selectedCell.value === currentCell.value)
-          currentCell.htmlElement.classList.add(['same-value-highlight']);
+          currentCell.htmlElement.classList.add(['same-value']);
         else if (this.#inSameBox(this.selectedCell.row, this.selectedCell.column, row, col))
-          currentCell.htmlElement.classList.add(['secondary-highlight']);
+          currentCell.htmlElement.classList.add(['related']);
         else if (row === this.selectedCell.row) 
-          currentCell.htmlElement.classList.add(['secondary-highlight']);
+          currentCell.htmlElement.classList.add(['related']);
         else if (col === this.selectedCell.column) 
-          currentCell.htmlElement.classList.add(['secondary-highlight']);
+          currentCell.htmlElement.classList.add(['related']);
       }
       
     }
@@ -163,7 +163,7 @@ export class Board {
       
       /* if (currentCell.value === newValue) {
         this.selectedCell.htmlElement.classList.add('invalid');
-        currentCell.htmlElement.classList.add('invalid-highlight');
+        currentCell.htmlElement.classList.add('invalid');
         this.#markCellInvalid(currentCell.row, currentCell.column);
       } */
     }
@@ -179,7 +179,7 @@ export class Board {
       
       /* if (currentCell.value === newValue) {
         this.selectedCell.htmlElement.classList.add('invalid');
-        currentCell.htmlElement.classList.add('invalid-highlight');
+        currentCell.htmlElement.classList.add('invalid');
         this.#markCellInvalid(currentCell.row, currentCell.column);
       } */
     }

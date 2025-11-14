@@ -16,14 +16,16 @@
 }
 
 .cell {
-  border-right: 1px solid var(--text-30);
-  border-bottom: 1px solid var(--text-30);
+  border-right: 1px solid var(--cell-border);
+  border-bottom: 1px solid var(--cell-border);
   display: inline-block;
   font-size: 1.5rem;
   text-align: center;
   align-content: center;
-  color: var(--user-answer);
+  color: var(--user-answer-cell-text);
+  background-color: inherit;
 
+  /* Prefilled text */
   &.is-given {
     color: var(--text);
     font-weight: normal;
@@ -32,41 +34,61 @@
   &.right-border { border-right: 2px solid var(--text); }
 
   &.bottom-border { border-bottom: 2px solid var(--text); }
-
-  &.same-value-highlight { background-color: var(--same-value-highlight); }
-
-  &.secondary-highlight { background-color: var(--highlight); }
-
-  &.invalid-highlight { background-color: var(--invalid-bg); }
-
-  &.is-given.selected-highlight { color: var(--selected-text); }
-  
-  &.selected-highlight {
-    color: var(--user-answer-selected-text);
-    background-color: var(--selected-highlight);
-  }
-
-  &.selected-highlight {
-    .notes-container .note { color: var(--selected-text); }
-  }
   
   .notes-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 1px 2px;
+    color: var(--text);
     
     .note {
       font-size: 0.5rem;
-      color: var(--accent);
       opacity: 0;
     }
 
     .note.show { opacity: 1; }
   }
+
+  /* --- BACKGROUND COLOURS */
+  /* Order of specificity for bg colours (i.e. background colours of cells later on the list should override background colours of cells higher on the list):
+      1. Default cell colour (inherit)
+      2. Invalid cell
+      3. Related cell
+      4. Same value cell
+      5. Selected cell
+  */
+  &.invalid { background-color: var(--invalid-cell-background); }
+
+  &.related { background-color: var(--related-cell-background); }
+
+  &.same-value { background-color: var(--same-value-cell-background); }
+
+  &.selected { background-color: var(--selected-cell-background); }
+
+  /* --- NORMAL TEXT COLOURS */
+  /* Order of specificity:
+      1. Notes
+      2. User answer (default because there will be more of these than prefilled cells)
+      3. Prefilled cell
+      4. Invalid cell (yes, background colour of invalid cell can be overridden by others but not the text colour)
+  */
+  
+  &.prefilled { color: var(--prefilled-cell-text); }
+
+  &.invalid { color: var(--invalid-cell-text); }
+
+  /* --- STATE CHANGED TEXT COLOURS */
+  
+  &.selected { color: var(--user-answer-selected-cell-text); }
+
+  &.selected .notes-container { color: var(--notes-selected-cell-text); }
+
+  &.prefilled.selected { color: var(--prefilled-selected-cell-text); }
 }
 
-.invalid { color: var(--invalid-text) !important; }
+/* Invalid cell text colour */
+/* .invalid { color: var(--invalid-text) !important; } */
 
 .loading-container,
 .play-button-container {

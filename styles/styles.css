@@ -98,7 +98,7 @@ select { color: var(--text); }
   margin-right: 0.25em;
 }
 
-.grey-text { color: var(--grey); }
+.grey-text { color: var(--text-grey-2); }
 
 
 /* TOGGLE BUTTON */

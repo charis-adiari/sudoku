@@ -3,25 +3,26 @@
   --black-tint-1: #192125;
   --black-tint-2: #1C293A;
   --black-tint-3: #29343D;
-  
+
   --white: #DADDD4;
+  --white-opacity-50: rgba(218, 221, 212, 0.5);
   --white-shade-grey: #B5B5A1;
-  
+
   --brand: #E7E718;
   --brand-shade: #B9B913;
-  
+
   --blue: #96D0FE;
   --blue-shade-1: #6CBEE6;
   --blue-shade-2: #3C649F;
   --blue-shade-2-saturated: #004DAF;
 
   --red: #CB180B;
+  --red-tint: #EAB0AC;
   --red-shade: #B0180E;
 
   --green: #7DBD41;
   --green-shade: #649834;
 
-  /*not included*/
   --grey: #9ba2a8;
 }
 
@@ -30,17 +31,18 @@
   --text-30: rgba(12, 12, 9, 0.3);
   --background: #f7f7f4;
   --btn-text: var(--text);
-  
+
   --primary: #E7E718;
   --selected-highlight: rgba(41, 94, 141, 0.85);
   --user-answer-selected-text: #c7e7f3;
   --selected-text: var(--text);
   --same-value-highlight: rgba(41, 94, 141, 0.5);
   --highlight: rgba(51, 122, 184, 0.18);
-  
+
   --accent: #41464a;
   --user-answer: #094274;
-  --invalid-bg: #faa49e; /* 1 shade lighter */
+  --invalid-bg: #faa49e;
+  /* 1 shade lighter */
   --invalid-text: #f44034;
 
   --green: #7bc03f;
@@ -51,22 +53,29 @@
   --background-tint-1: var(--black-tint-3);
 
   --text: var(--white);
+  --cell-border: var(--white-opacity-50);
   --text-grey-1: var(--white-shade-grey);
-  --text-on-selected-cell: var(--black-tint-1);
+  --text-grey-2: var(--grey);
 
   --primary: var(--brand);
   --primary-shade-1: var(--brand-shade);
-
-  --selected-cell-bg: var(--blue-shade-1);
-  --same-value-cell-bg: var(--blue-shade-2);
-  --highlighted-cell-bg: var(--black-tint-2);
-
-  --user-answer: var(--blue);
-  --user-answer-on-select-cell: var(--blue-shade-2-saturated);
 
   --danger: var(--red);
   --danger-shade-1: var(--red-shade);
 
   --success: var(--green);
   --success-shade-1: var(--green-shade);
+
+  --invalid-cell-background: var(--red-tint);
+  --related-cell-background: var(--black-tint-2);
+  --same-value-cell-background: var(--blue-shade-2);
+  --selected-cell-background: var(--blue-shade-1);
+
+  --user-answer-cell-text: var(--blue);
+  --prefilled-cell-text: var(--white);
+  --invalid-cell-text: var(--red);
+
+  --user-answer-selected-cell-text: var(--blue-shade-2-saturated);
+  --notes-selected-cell-text: var(--black);
+  --prefilled-selected-cell-text: var(--black);
 }

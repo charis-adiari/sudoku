@@ -19,7 +19,7 @@ export class Cell {
       this.htmlElement.innerHTML = this.#getElementInnerHtml();
     } else {
       this.isGiven = true;
-      this.htmlElement.classList.add('is-given')
+      this.htmlElement.classList.add('prefilled')
       this.htmlElement.innerHTML = this.value;
     }
 
