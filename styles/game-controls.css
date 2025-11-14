@@ -8,7 +8,8 @@
   .vertical-arrows-container {
     display: flex;
     flex-direction: column;
-    row-gap: 0.25em;
+    align-self: stretch;
+    justify-content: space-between;
   }
 }
 
@@ -16,7 +17,13 @@
   margin: 0.5em 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
+
+  .controls-inner-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+  }
 }
 
 .number-buttons-container {
