@@ -1,5 +1,5 @@
 import { Game } from "./scripts/game.js";
-import { toggleDropdown } from "./scripts/utilities/utility-functions.js";
+import { toggleDropdown, changeButtonBackgroundColour } from "./scripts/utilities/utility-functions.js";
 
 const game = new Game();
 
@@ -19,3 +19,5 @@ $('#settings').on('click', (e) => {
   e.stopPropagation();
   toggleDropdown()
 });
+
+$('.btn').on('click', (e) => changeButtonBackgroundColour(e));

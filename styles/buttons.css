@@ -7,23 +7,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0.25rem;
+  
+  --btn-text: var(--background);
+  --btn-background: var(--primary);
+  --btn-background-active: var(--primary-shade-1);
+  color: var(--btn-text);
+  background: var(--btn-background);
+  transition: background-color 0.4s ease;
 
   &.btn-primary,
   &.btn-secondary {
     padding: 0.5rem 1rem;
-
-    --btn-text: var(--background);
-    --btn-background: var(--primary);
-    --btn-background-active: var(--primary-shade-1);
-
-    color: var(--btn-text);
-    background: var(--btn-background);
-    border-radius: 0.25rem;
-
-    &:active,
-    &:hover {
-      background-color: var(--btn-background-active);
-    }
   }
 
   &.btn-secondary {
@@ -34,8 +29,10 @@
     border: 1px solid var(--btn-border-color);
   }
 
-  /* Used to pair icon buttons with btn-primary and btn-secondary */
   &.btn-icon {
+    --btn-text: var(--white);
+    --btn-background: var(--background);
+    --btn-background-active: var(--background-tint-1);
     height: 2rem;
     aspect-ratio: 1;
     padding: 0;
@@ -65,25 +62,35 @@
     i {
       height: 1.5rem;
     }
-    
+
     i::before {
       font-size: 1.5rem;
     }
   }
 
   &.btn-control.active {
-  color: var(--white);
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    width: 4px;
-    height: 4px;
-    background-color: var(--white);
+    color: var(--white);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      width: 4px;
+      height: 4px;
+      background-color: var(--white);
+    }
+  }
+
+  &.clicked {
+    background-color: var(--btn-background-active);
   }
 }
+
+@media (min-width: 992px) {
+  .btn:hover {
+    background-color: var(--btn-background-active);
+  }
 }

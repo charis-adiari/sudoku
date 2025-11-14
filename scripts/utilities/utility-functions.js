@@ -6,3 +6,15 @@ export const toggleDropdown = () => {
   else
     $('.dropdown').addClass('show');
 };
+
+export const changeButtonBackgroundColour = (e) => {
+  const button = e.target.closest('button');
+
+  if (button.id === 'notes') return;
+
+  button.classList.add('clicked');
+  
+  setTimeout(() => {
+    button.classList.remove('clicked');
+  }, 400);
+}
