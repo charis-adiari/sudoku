@@ -102,15 +102,15 @@ select { color: var(--text); }
 
 
 /* TOGGLE BUTTON */
-.check:checked + .slider {
+.checkbox:checked + .slider {
   background-color: var(--primary);
 }
 
-.check:focus + .slider {
+.checkbox:focus + .slider {
   box-shadow: 0 0 1px var(--primary);
 }
 
-.check:checked + .slider:before {
+.checkbox:checked + .slider:before {
   -webkit-transform: translateX(1.8rem);
   -ms-transform: translateX(1.8rem);
   transform: translateX(1.8rem);
@@ -125,7 +125,7 @@ select { color: var(--text); }
 }
 
 /* Hide default HTML checkbox */
-.switch .check {
+.switch .checkbox {
   display: none;
 }
 
